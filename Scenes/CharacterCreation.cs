@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Raylib_cs;
 
 namespace VGP133_Final_Assignment.Scenes
 {
@@ -10,15 +11,16 @@ namespace VGP133_Final_Assignment.Scenes
         {
             SceneName = "Character Creation";
         }
+        public override void Update()
+        {
+            
+        }
 
         public override void Render()
         {
-            throw new NotImplementedException();
+            Raylib.ClearBackground(Color.RayWhite);
+            Raylib.DrawText("Character Creation Scene", 200, 200, 20, Color.DarkGray);
         }
 
-        public override void Update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
