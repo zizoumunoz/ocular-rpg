@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using VGP133_Final_Assignment.Core;
 
 namespace HelloWorld;
 
@@ -9,15 +10,8 @@ public static class Program
     {
         Raylib.InitWindow(800, 480, "Hello World");
 
-        while (!Raylib.WindowShouldClose())
-        {
-            Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.White);
-
-            Raylib.DrawText("Hello, world!", 12, 12, 20, Color.Black);
-
-            Raylib.EndDrawing();
-        }
+        Game game = new Game();
+        game.Run();
 
         Raylib.CloseWindow();
     }
