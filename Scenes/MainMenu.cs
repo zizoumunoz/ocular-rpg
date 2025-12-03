@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using VGP133_Final_Assignment.Core;
 using Raylib_cs;
+using VGP133_Final_Assignment.Components;
 
 namespace VGP133_Final_Assignment.Scenes
 {
@@ -15,7 +16,8 @@ namespace VGP133_Final_Assignment.Scenes
 
         public override void Render()
         {
-            Raylib.ClearBackground(Color.Red);
+            Raylib.ClearBackground(Color.White);
+            _background.Render();
             Raylib.DrawText("Main Menu Scene", 200, 200, 20, Color.Black);
         }
         public override void Update()
@@ -31,5 +33,10 @@ namespace VGP133_Final_Assignment.Scenes
                     break;
             }
         }
+
+        private Sprite _background =
+            new Sprite("Assets/book_sketch.png", new System.Numerics.Vector2(0f, 0f), 5f);
+
+        public Sprite Background { get => _background; set => _background = value; }
     }
 }
