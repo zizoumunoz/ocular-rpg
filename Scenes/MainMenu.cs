@@ -38,6 +38,6 @@ namespace VGP133_Final_Assignment.Scenes
                 default:
                     break;
             }
-        } 
+        }
     }
 }
