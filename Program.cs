@@ -9,6 +9,8 @@ public static class Program
     public static void Main()
     {
         Raylib.InitWindow(1920, 1080, "Hello World");
+        Raylib.SetTargetFPS(60);
+
 
         Game game = new Game();
         game.Run();
