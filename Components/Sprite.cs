@@ -9,12 +9,11 @@ namespace VGP133_Final_Assignment.Components
     public class Sprite
     {
 
-        public Sprite(string filePath, Texture2D texture, Vector2 position, float scale = 1f)
+        public Sprite(string filePath, Vector2 position, float scale = 1f)
         {
-            _texture = texture;
             _position = position;
             _scale = scale;
-            Raylib.LoadTexture(filePath);
+            _texture = Raylib.LoadTexture(filePath);
             // set filter for pixel art sharpness
             Raylib.SetTextureFilter(_texture, TextureFilter.Point);
 
