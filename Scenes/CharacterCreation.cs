@@ -131,7 +131,6 @@ namespace VGP133_Final_Assignment.Scenes
             Old
         }
 
-
         private HairColor _currentHairColor;
         private Age _currentAge;
         private Gender _currentGender;
