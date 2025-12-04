@@ -38,7 +38,7 @@ namespace VGP133_Final_Assignment.Components
 
         public void Render()
         {
-            Raylib.DrawCircle(_xCoordinate, _yCoordinate, _radius, new Color(255, 0, 0, 100));
+            Raylib.DrawCircle(_xCoordinate, _yCoordinate, _radius, new Color(0, 0, 0, 0));
         }
 
         private float _radius;
