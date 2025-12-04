@@ -21,11 +21,10 @@ namespace VGP133_Final_Assignment.Scenes
         public override void Update()
         {
             _nameBox.Update();
-            _hairButtonA.Update();
+            UpdateButtonGroup(_hairButtonA, _hairButtonB, _hairButtonC);
+            UpdateButtonGroup(_genderButtonA, _genderButtonB, _genderButtonC);
+            UpdateButtonGroup(_ageButtonA, _ageButtonB, _ageButtonC);
 
-
-            // reset buttons
-            _hairButtonA.IsPressed = false;
         }
 
         public override void Render()
@@ -37,11 +36,46 @@ namespace VGP133_Final_Assignment.Scenes
             Raylib.DrawText("Character Creation Scene", 0, 0, 20, Color.Black);
 
             _nameBox.Render();
-            _hairButtonA.Render();
+            RenderButtonGroup(_hairButtonA, _hairButtonB, _hairButtonC);
+            RenderButtonGroup(_genderButtonA, _genderButtonB, _genderButtonC);
+            RenderButtonGroup(_ageButtonA, _ageButtonB, _ageButtonC);
+
+        }
+
+        private void RenderButtonGroup(ButtonCircle buttonA, ButtonCircle buttonB, ButtonCircle buttonC)
+        {
+            buttonA.Render();
+            buttonB.Render();
+            buttonC.Render();
+        }
+
+        private void UpdateButtonGroup(ButtonCircle buttonA, ButtonCircle buttonB, ButtonCircle buttonC)
+        {
+            buttonA.Update();
+            buttonB.Update();
+            buttonC.Update();
+
+            buttonA.IsPressed = false;
+            buttonB.IsPressed = false;
+            buttonC.IsPressed = false;
         }
 
         private TextInput _nameBox = new TextInput(540, 51, 248, 112);
+
         private ButtonCircle _hairButtonA = new ButtonCircle(61, 370, 350);
+        private ButtonCircle _hairButtonB = new ButtonCircle(61, 520, 340);
+        private ButtonCircle _hairButtonC = new ButtonCircle(61, 670, 350);
+
+        private ButtonCircle _genderButtonA = new ButtonCircle(61, 370, 550);
+        private ButtonCircle _genderButtonB = new ButtonCircle(61, 520, 540);
+        private ButtonCircle _genderButtonC = new ButtonCircle(61, 670, 550);
+
+        private ButtonCircle _ageButtonA = new ButtonCircle(61, 370, 750);
+        private ButtonCircle _ageButtonB = new ButtonCircle(61, 520, 740);
+        private ButtonCircle _ageButtonC = new ButtonCircle(61, 670, 750);
+
+        
+
 
     }
 }
