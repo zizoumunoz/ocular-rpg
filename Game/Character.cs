@@ -14,11 +14,12 @@ namespace VGP133_Final_Assignment.Game
             _spriteLocation.X = spriteLocation.X * 5;
             _spriteLocation.Y = spriteLocation.Y * 5;
 
-            _playerBody = new Sprite("character_body", _spriteLocation, 5);
-            _playerHair = new Sprite("hair_yellow_boy", _spriteLocation, 5);
-            _playerCloak = new Sprite("clothes_knight", _spriteLocation + _cloaksOffset, 5);
-            _playerHat = new Sprite("hat_knight", _spriteLocation + _hatKnightOffset, 5);
-            _playerFace = new Sprite("face_young", _spriteLocation, 5);
+            _playerClass = Class.Wizard;
+            _hairColor = HairColor.Pink;
+            _age = Age.Young;
+            _gender = Gender.Masc;
+
+            UpdateSprite();
         }
 
         public void Update()
@@ -28,23 +29,19 @@ namespace VGP133_Final_Assignment.Game
 
         public void UpdateSprite()
         {
-            string temp = "";
             switch (_hairColor)
             {
                 case HairColor.Pink:
                     switch (_gender)
                     {
                         case Gender.Masc:
-                            temp = "hair_pink_boy";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairBoyOffset, 5);
+                            _playerHair = new Sprite("hair_pink_boy", _spriteLocation + _hairBoyOffset, 5);
                             break;
                         case Gender.Other:
-                            temp = "hair_pink_other";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairOtherOffset, 5);
+                            _playerHair = new Sprite("hair_pink_other", _spriteLocation + _hairOtherOffset, 5);
                             break;
                         case Gender.Fem:
-                            temp = "hair_pink_girl";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairGirlOffset, 5);
+                            _playerHair = new Sprite("hair_pink_girl", _spriteLocation + _hairGirlOffset, 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -55,16 +52,13 @@ namespace VGP133_Final_Assignment.Game
                     switch (_gender)
                     {
                         case Gender.Masc:
-                            temp = "hair_yellow_boy";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairBoyOffset, 5);
+                            _playerHair = new Sprite("hair_yellow_boy", _spriteLocation + _hairBoyOffset, 5);
                             break;
                         case Gender.Other:
-                            temp = "hair_yellow_other";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairOtherOffset, 5);
+                            _playerHair = new Sprite("hair_yellow_other", _spriteLocation + _hairOtherOffset, 5);
                             break;
                         case Gender.Fem:
-                            temp = "hair_yellow_girl";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairGirlOffset, 5);
+                            _playerHair = new Sprite("hair_yellow_girl", _spriteLocation + _hairGirlOffset, 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -75,16 +69,13 @@ namespace VGP133_Final_Assignment.Game
                     switch (_gender)
                     {
                         case Gender.Masc:
-                            temp = "hair_blue_boy";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairBoyOffset, 5);
+                            _playerHair = new Sprite("hair_blue_boy", _spriteLocation + _hairBoyOffset, 5);
                             break;
                         case Gender.Other:
-                            temp = "hair_blue_other";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairOtherOffset, 5);
+                            _playerHair = new Sprite("hair_blue_other", _spriteLocation + _hairOtherOffset, 5);
                             break;
                         case Gender.Fem:
-                            temp = "hair_blue_girl";
-                            _playerHair = new Sprite(temp, _spriteLocation + _hairGirlOffset, 5);
+                            _playerHair = new Sprite("hair_blue_girl", _spriteLocation + _hairGirlOffset, 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -98,22 +89,16 @@ namespace VGP133_Final_Assignment.Game
             switch (_playerClass)
             {
                 case Class.Knight:
-                    temp = "hat_knight";
-                    _playerHat = new Sprite(temp, _spriteLocation + _hatKnightOffset, 5);
-                    temp = "clothes_knight";
-                    _playerCloak = new Sprite(temp, _spriteLocation + _cloaksOffset, 5);
+                    _playerHat = new Sprite("hat_knight", _spriteLocation + _hatKnightOffset, 5);
+                    _playerCloak = new Sprite("clothes_knight", _spriteLocation + _cloaksOffset, 5);
                     break;
                 case Class.Jester:
-                    temp = "hat_jester";
-                    _playerHat = new Sprite(temp, _spriteLocation + _hatJesterOffset, 5);
-                    temp = "clothes_default";
-                    _playerCloak = new Sprite(temp, _spriteLocation + _cloaksOffset, 5);
+                    _playerHat = new Sprite("hat_jester", _spriteLocation + _hatJesterOffset, 5);
+                    _playerCloak = new Sprite("clothes_default", _spriteLocation + _cloaksOffset, 5);
                     break;
                 case Class.Wizard:
-                    temp = "hat_wizard";
-                    _playerHat = new Sprite(temp, _spriteLocation + _hatWizardOffset, 5);
-                    temp = "clothes_wizard";
-                    _playerCloak = new Sprite(temp, _spriteLocation + _cloaksOffset, 5);
+                    _playerHat = new Sprite("hat_wizard", _spriteLocation + _hatWizardOffset, 5);
+                    _playerCloak = new Sprite("clothes_wizard", _spriteLocation + _cloaksOffset, 5);
                     break;
                 default:
                     break;
@@ -122,22 +107,17 @@ namespace VGP133_Final_Assignment.Game
             switch (_age)
             {
                 case Age.Young:
-                    temp = "face_young";
-                    _playerFace = new Sprite(temp, _spriteLocation + _faceYoungOffest, 5);
+                    _playerFace = new Sprite("face_young", _spriteLocation + _faceYoungOffest, 5);
                     break;
                 case Age.Adult:
-                    temp = "face_adult";
-                    _playerFace = new Sprite(temp, _spriteLocation + _faceAdultOffest, 5);
+                    _playerFace = new Sprite("face_adult", _spriteLocation + _faceAdultOffest, 5);
                     break;
                 case Age.Old:
-                    temp = "face_old";
-                    _playerFace = new Sprite(temp, _spriteLocation + _faceOldOffest, 5);
+                    _playerFace = new Sprite("face_old", _spriteLocation + _faceOldOffest, 5);
                     break;
                 default:
                     break;
             }
-
-            
         }
 
         public void Render()
