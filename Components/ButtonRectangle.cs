@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Numerics;
 using Raylib_cs;
 
 namespace VGP133_Final_Assignment.Components
@@ -13,6 +14,9 @@ namespace VGP133_Final_Assignment.Components
             _height = height;
             _x = x;
             _y = y;
+            _hitbox = new Rectangle(x, y, length, height);
+            _texture =
+                new Sprite("Assets/character_creation/selected_left_heart.png", new Vector2(x, y), 5);
 
             if (render)
             {
@@ -27,14 +31,7 @@ namespace VGP133_Final_Assignment.Components
         public void Update()
         {
             // check hover
-            if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _hitbox))
-            {
-                _isMouseHovering = true;
-            }
-            else
-            {
-                _isMouseHovering = false;
-            }
+            _isMouseHovering = Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _hitbox);
 
             // toggle is clicked
             if (_isMouseHovering && Raylib.IsMouseButtonPressed(MouseButton.Left))
@@ -47,12 +44,13 @@ namespace VGP133_Final_Assignment.Components
         public void Render()
         {
             Raylib.DrawRectangle(_x, _y, _width, _height, _color);
+            _texture.Render();
         }
 
         private bool _isMouseHovering;
         private bool _isPressed;
         private Rectangle _hitbox;
-        private Sprite? _texture;
+        private Sprite _texture;
         private Color _color;
 
 
