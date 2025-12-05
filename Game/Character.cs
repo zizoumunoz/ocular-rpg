@@ -9,18 +9,25 @@ namespace VGP133_Final_Assignment.Game
 {
     public class Character
     {
-        public Character(HairColor hairColor, Gender gender, Age age, Class playerClass)
+        public Character(Vector2 spriteLocation)
         {
-            _hairColor = hairColor;
-            _gender = gender;
-            _age = age;
-            _playerClass = playerClass;
+            _spriteLocation.X = spriteLocation.X * 5;
+            _spriteLocation.Y = spriteLocation.Y * 5;
 
             string temp = "Assets/character_creation/character_body.png";
             _playerBody = new Sprite(temp, _spriteLocation, 5);
 
-            // get hair sprite from color and gender
+            temp = "Assets/character_creation/hair_yellow_boy.png";
+            _playerHair = new Sprite(temp, _spriteLocation, 5);
 
+            temp = "Assets/character_creation/clothes_knight.png";
+            _playerCloak = new Sprite(temp, _spriteLocation, 5);
+
+            temp = "Assets/character_creation/hat_knight.png";
+            _playerHat = new Sprite(temp, _spriteLocation, 5);
+
+            temp = "Assets/character_creation/face_young.png";
+            _playerFace = new Sprite(temp, _spriteLocation, 5);
         }
 
         public void Update()
@@ -38,15 +45,15 @@ namespace VGP133_Final_Assignment.Game
                     {
                         case Gender.Masc:
                             temp = "Assets/character_creation/hair_pink_boy.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         case Gender.Other:
                             temp = "Assets/character_creation/hair_pink_other.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         case Gender.Fem:
                             temp = "Assets/character_creation/hair_pink_girl.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -58,15 +65,15 @@ namespace VGP133_Final_Assignment.Game
                     {
                         case Gender.Masc:
                             temp = "Assets/character_creation/hair_yellow_boy.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         case Gender.Other:
                             temp = "Assets/character_creation/hair_yellow_other.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         case Gender.Fem:
                             temp = "Assets/character_creation/hair_yellow_girl.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -78,15 +85,15 @@ namespace VGP133_Final_Assignment.Game
                     {
                         case Gender.Masc:
                             temp = "Assets/character_creation/hair_blue_boy.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         case Gender.Other:
                             temp = "Assets/character_creation/hair_blue_other.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         case Gender.Fem:
                             temp = "Assets/character_creation/hair_blue_girl.png";
-                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
+                            _playerHair = new Sprite(temp, _spriteLocation, 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -142,7 +149,10 @@ namespace VGP133_Final_Assignment.Game
 
         public void Render()
         {
+            _playerBody.Render();
             _playerHair.Render();
+            _playerHat.Render();
+            _playerCloak.Render();
         }
 
         private Vector2 _spriteLocation;
@@ -163,5 +173,6 @@ namespace VGP133_Final_Assignment.Game
         public Gender Gender { get => _gender; set => _gender = value; }
         public Age Age { get => _age; set => _age = value; }
         public Class PlayerClass { get => _playerClass; set => _playerClass = value; }
+        public Vector2 SpriteLocation { get => _spriteLocation; set => _spriteLocation = value; }
     }
 }

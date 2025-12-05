@@ -28,7 +28,9 @@ namespace VGP133_Final_Assignment.Scenes
             temp = "Assets/character_creation/selected_right_heart.png";
             _classSelectRight =
                 new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 323 * _uiScale, 12 * _uiScale, temp);
-        } 
+
+            _player = new Character(new Vector2(256, 79));
+        }
 
         public override void Update()
         {
@@ -113,7 +115,8 @@ namespace VGP133_Final_Assignment.Scenes
             Raylib.DrawText($"Current gender: {(int)_currentGender}", 0, 40, 20, Color.Black);
             Raylib.DrawText($"Current age: {(int)_currentAge}", 0, 60, 20, Color.Black);
 
-            // _player.Render();
+            _player.Render();
+
         }
 
         private void UpdateSelects()
@@ -191,7 +194,7 @@ namespace VGP133_Final_Assignment.Scenes
 
         private const int _uiScale = 5;
 
-        private Character _player = new Character(HairColor.Blue, Gender.Other, Age.Young, Class.Jester);
+        private Character _player;
 
         // Sprites
         private Sprite _uiHairSelect =
