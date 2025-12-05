@@ -22,12 +22,20 @@ namespace VGP133_Final_Assignment.Components
 
         public void Render()
         {
-            Raylib.DrawTextureEx(_texture, _position, 0f, _scale, Color.RayWhite);
+            Raylib.DrawTextureEx(_texture, _position, 0f, _scale, _tint);
         }
 
         public void Update()
         {
-
+            switch (_isVisible)
+            {
+                case true:
+                    _tint = Color.RayWhite;
+                    break;
+                default:
+                    _tint = new Color(0, 0, 0, 0);
+                    break;
+            }
         }
 
         public void Unload()
@@ -36,10 +44,15 @@ namespace VGP133_Final_Assignment.Components
         }
 
         private Texture2D _texture;
+        private Color _tint = Color.RayWhite;
+
         private Vector2 _position;
         private float _scale;
+        private bool _isVisible;
+
 
         public Vector2 Position { get => _position; set => _position = value; }
         public float Scale { get => _scale; set => _scale = value; }
+        public bool IsVisible { get => _isVisible; set => _isVisible = value; }
     }
 }
