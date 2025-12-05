@@ -20,19 +20,28 @@ namespace VGP133_Final_Assignment.Game
             _playerBody = new Sprite(temp, _spriteLocation, 5);
 
             // get hair sprite from color and gender
+
+        }
+
+        public void Update()
+        {
+            string temp = "";
             switch (_hairColor)
             {
                 case HairColor.Pink:
                     switch (_gender)
                     {
                         case Gender.Masc:
-                            _playerHair = new Sprite("Assets/character_creation/hair_pink_boy.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_pink_boy.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         case Gender.Other:
-                            _playerHair = new Sprite("Assets/character_creation/hair_pink_other.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_pink_other.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         case Gender.Fem:
-                            _playerHair = new Sprite("Assets/character_creation/hair_pink_girl.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_pink_girl.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -43,13 +52,16 @@ namespace VGP133_Final_Assignment.Game
                     switch (_gender)
                     {
                         case Gender.Masc:
-                            _playerHair = new Sprite("Assets/character_creation/hair_yellow_boy.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_yellow_boy.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         case Gender.Other:
-                            _playerHair = new Sprite("Assets/character_creation/hair_yellow_other.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_yellow_other.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         case Gender.Fem:
-                            _playerHair = new Sprite("Assets/character_creation/hair_yellow_girl.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_yellow_girl.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -60,13 +72,16 @@ namespace VGP133_Final_Assignment.Game
                     switch (_gender)
                     {
                         case Gender.Masc:
-                            _playerHair = new Sprite("Assets/character_creation/hair_blue_boy.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_blue_boy.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         case Gender.Other:
-                            _playerHair = new Sprite("Assets/character_creation/hair_blue_other.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_blue_other.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         case Gender.Fem:
-                            _playerHair = new Sprite("Assets/character_creation/hair_blue_girl.png", new Vector2(0, 0), 5);
+                            temp = "Assets/character_creation/hair_blue_girl.png";
+                            _playerHair = new Sprite(temp, new Vector2(0, 0), 5);
                             break;
                         default:
                             Console.WriteLine("Sprite data not found");
@@ -118,11 +133,6 @@ namespace VGP133_Final_Assignment.Game
                 default:
                     break;
             }
-        }
-
-        public void Update()
-        {
-
         }
 
         public void Render()
