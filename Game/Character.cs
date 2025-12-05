@@ -19,7 +19,12 @@ namespace VGP133_Final_Assignment.Game
             _age = Age.Young;
             _gender = Gender.Masc;
 
-            UpdateSprite();
+            _playerBody = new Sprite("character_body", _spriteLocation, 5);
+            _playerHair = new Sprite("hair_pink_boy", _spriteLocation + _hairBoyOffset, 5);
+            _playerHat = new Sprite("hat_wizard", _spriteLocation + _hatWizardOffset, 5);
+            _playerCloak = new Sprite("clothes_wizard", _spriteLocation + _cloaksOffset, 5);
+            _playerFace = new Sprite("face_young", _spriteLocation + _faceYoungOffest, 5);
+
         }
 
         public void Update()
