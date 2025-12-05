@@ -19,14 +19,8 @@ namespace VGP133_Final_Assignment.Components
 
         public void Update()
         {
-            if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _box))
-            {
-                _isMouseOnText = true;
-            }
-            else
-            {
-                _isMouseOnText = false;
-            }
+            _isMouseOnText = Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _box);
+
             if (_isMouseOnText)
             {
                 Raylib.SetMouseCursor(MouseCursor.IBeam);
@@ -44,10 +38,15 @@ namespace VGP133_Final_Assignment.Components
 
                 }
                 // while key is returing something. getcharpressed returns zero if nothing pressed
-
-                if (Raylib.IsKeyPressed(KeyboardKey.Backspace) && _textData.Length > 0)
+                if (Raylib.IsKeyDown(KeyboardKey.LeftControl) && Raylib.IsKeyPressed(KeyboardKey.Backspace))
                 {
-                    _textData = _textData.Remove(_textData.Length - 1);
+                    _textData = "";
+                }
+                else if (Raylib.IsKeyPressed(KeyboardKey.Backspace) && _textData.Length > 0)
+                {
+                    
+                        _textData = _textData.Remove(_textData.Length - 1);
+                   
                 }
             }
             else
