@@ -74,5 +74,6 @@ namespace VGP133_Final_Assignment.Components
         public int X { get => _x; set => _x = value; }
         public int Y { get => _y; set => _y = value; }
         public Sprite Texture { get => _texture; set => _texture = value; }
+        public bool IsPressed { get => _isPressed; set => _isPressed = value; }
     }
 }

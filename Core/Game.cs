@@ -18,6 +18,8 @@ namespace VGP133_Final_Assignment.Core
 
         public void Run()
         {
+            AssetManager.LoadAssets();
+
             while (!Raylib.WindowShouldClose())
             {
                 _sceneHandler.CurrentScene?.Update();
@@ -26,7 +28,8 @@ namespace VGP133_Final_Assignment.Core
                 _sceneHandler.CurrentScene?.Render();
                 Raylib.EndDrawing();
             }
-            _sceneHandler.CurrentScene?.Unload();
+
+            AssetManager.UnloadAssets();
         }
 
         private SceneHandler _sceneHandler = new SceneHandler();

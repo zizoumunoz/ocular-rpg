@@ -17,11 +17,6 @@ namespace VGP133_Final_Assignment.Scenes
         public abstract void Update();
         public abstract void Render();
 
-        public virtual void Unload()
-        {
-            _background.Unload();
-        }
-
         private string? _sceneName;
 
         protected Sprite _background;

@@ -20,12 +20,12 @@ namespace VGP133_Final_Assignment.Scenes
         {
             SceneName = "Character Creation";
             _background =
-            new Sprite("Assets/character_creation/book.png", new System.Numerics.Vector2(0f, 0f), 5f);
+            new Sprite("book", new System.Numerics.Vector2(0f, 0f), 5f);
 
-            string temp = "Assets/character_creation/selected_left_heart.png";
+            string temp = "selected_left_heart";
             _classSelectLeft =
                 new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 226 * _uiScale, 12 * _uiScale, temp);
-            temp = "Assets/character_creation/selected_right_heart.png";
+            temp = "selected_right_heart";
             _classSelectRight =
                 new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 323 * _uiScale, 12 * _uiScale, temp);
 
@@ -35,60 +35,82 @@ namespace VGP133_Final_Assignment.Scenes
         public override void Update()
         {
             _nameBox.Update();
-            UpdateButtonGroup(_hairButtonA, _hairButtonB, _hairButtonC);
 
+            // ===== HAIR SELECTION =====
+            UpdateButtonGroup(_hairButtonA, _hairButtonB, _hairButtonC);
             if (_hairButtonA.IsPressed)
             {
                 _currentHairColor = HairColor.Pink;
+                _player.HairColor = _currentHairColor;
+                _player.UpdateSprite();
             }
             else if (_hairButtonB.IsPressed)
             {
                 _currentHairColor = HairColor.Yellow;
+                _player.HairColor = _currentHairColor;
+                _player.UpdateSprite();
             }
             else if (_hairButtonC.IsPressed)
             {
                 _currentHairColor = HairColor.Blue;
+                _player.HairColor = _currentHairColor;
+                _player.UpdateSprite();
             }
 
             ResetButtonGroup(_hairButtonA, _hairButtonB, _hairButtonC);
 
+            // ===== GENDER SELECTION ======
             UpdateButtonGroup(_genderButtonA, _genderButtonB, _genderButtonC);
-
             if (_genderButtonA.IsPressed)
             {
                 _currentGender = Gender.Masc;
+                _player.Gender = _currentGender;
+                _player.UpdateSprite();
             }
             else if (_genderButtonB.IsPressed)
             {
                 _currentGender = Gender.Other;
+                _player.Gender = _currentGender;
+                _player.UpdateSprite();
             }
             else if (_genderButtonC.IsPressed)
             {
                 _currentGender = Gender.Fem;
+                _player.Gender = _currentGender;
+                _player.UpdateSprite();
             }
 
             ResetButtonGroup(_genderButtonA, _genderButtonB, _genderButtonC);
 
+            // ===== AGE SELECTION ======
             UpdateButtonGroup(_ageButtonA, _ageButtonB, _ageButtonC);
             if (_ageButtonA.IsPressed)
             {
                 _currentAge = Age.Young;
+                _player.Age = _currentAge;
+                _player.UpdateSprite();
             }
             else if (_ageButtonB.IsPressed)
             {
                 _currentAge = Age.Adult;
+                _player.Age = _currentAge;
+                _player.UpdateSprite();
             }
             else if (_ageButtonC.IsPressed)
             {
                 _currentAge = Age.Old;
+                _player.Age = _currentAge;
+                _player.UpdateSprite();
             }
 
             ResetButtonGroup(_ageButtonA, _ageButtonB, _ageButtonC);
 
-            _classSelectLeft.Update();
-            _classSelectRight.Update();
+            UpdateCurrentClass();
 
             UpdateSelects();
+
+
+
         }
 
         public override void Render()
@@ -115,10 +137,15 @@ namespace VGP133_Final_Assignment.Scenes
             Raylib.DrawText($"Current gender: {(int)_currentGender}", 0, 40, 20, Color.Black);
             Raylib.DrawText($"Current age: {(int)_currentAge}", 0, 60, 20, Color.Black);
 
+            RenderCurrentClass();
+
             _player.Render();
 
         }
 
+        /// <summary>
+        /// Update the selection circle indicating which option is active
+        /// </summary>
         private void UpdateSelects()
         {
             switch (_currentHairColor)
@@ -188,9 +215,80 @@ namespace VGP133_Final_Assignment.Scenes
             buttonC.IsPressed = false;
         }
 
-        private HairColor _currentHairColor = 0;
-        private Age _currentAge = 0;
-        private Gender _currentGender = 0;
+        private void UpdateCurrentClass()
+        {
+            _classSelectLeft.Update();
+            _classSelectRight.Update();
+
+            if (_classSelectLeft.IsPressed)
+            {
+                switch (_player.PlayerClass)
+                {
+                    case Class.Knight:
+                        _player.PlayerClass = Class.Wizard;
+                        break;
+                    case Class.Jester:
+                        _player.PlayerClass = Class.Knight;
+                        break;
+                    case Class.Wizard:
+                        _player.PlayerClass = Class.Jester;
+                        break;
+                    default:
+                        break;
+                }
+                _classSelectLeft.IsPressed = false;
+                Console.WriteLine($"Current class: {_player.PlayerClass}");
+                _player.UpdateSprite();
+            }
+            else if (_classSelectRight.IsPressed)
+            {
+                switch (_player.PlayerClass)
+                {
+                    case Class.Knight:
+                        _player.PlayerClass = Class.Jester;
+                        break;
+                    case Class.Jester:
+                        _player.PlayerClass = Class.Wizard;
+                        break;
+                    case Class.Wizard:
+                        _player.PlayerClass = Class.Knight;
+                        break;
+                    default:
+                        break;
+                }
+                _classSelectRight.IsPressed = false;
+                _player.UpdateSprite();
+            }
+        }
+
+        private void RenderCurrentClass()
+        {
+            string classString = "";
+
+            switch (_player.PlayerClass)
+            {
+                case Class.Knight:
+                    classString = "Knight";
+                    break;
+                case Class.Jester:
+                    classString = "Jester";
+                    break;
+                case Class.Wizard:
+                    classString = "Wizard";
+                    break;
+                default:
+                    classString = "Unknown";
+                    break;
+
+            }
+
+            Raylib.DrawText(classString, 249 * _uiScale, 13 * _uiScale, 20 * _uiScale, new Color(178, 139, 120));
+        }
+
+        private HairColor _currentHairColor = HairColor.Pink;
+        private Age _currentAge = Age.Young;
+        private Gender _currentGender = Gender.Masc;
+        private Class _currentClass = Class.Knight;
 
         private const int _uiScale = 5;
 
@@ -198,11 +296,11 @@ namespace VGP133_Final_Assignment.Scenes
 
         // Sprites
         private Sprite _uiHairSelect =
-            new Sprite("Assets/character_creation/selected_circle.png", new Vector2(0 * _uiScale, 0 * _uiScale), _uiScale);
+            new Sprite("selected_circle", new Vector2(0 * _uiScale, 0 * _uiScale), _uiScale);
         private Sprite _uiGenderSelect =
-            new Sprite("Assets/character_creation/selected_circle.png", new Vector2(0 * _uiScale, 0 * _uiScale), _uiScale);
+            new Sprite("selected_circle", new Vector2(0 * _uiScale, 0 * _uiScale), _uiScale);
         private Sprite _uiAgeSelect =
-            new Sprite("Assets/character_creation/selected_circle.png", new Vector2(0 * _uiScale, 0 * _uiScale), _uiScale);
+            new Sprite("selected_circle", new Vector2(0 * _uiScale, 0 * _uiScale), _uiScale);
 
         private TextInput _nameBox = new TextInput(540, 51, 248, 112);
 

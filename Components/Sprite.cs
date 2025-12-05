@@ -3,19 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using VGP133_Final_Assignment.Core;
 
 namespace VGP133_Final_Assignment.Components
 {
     public class Sprite
     {
 
-        public Sprite(string filePath, Vector2 position, float scale = 1f, bool isVisible = true)
+        public Sprite(string textureName, Vector2 position, float scale = 1f, bool isVisible = true)
         {
             _position = position;
             _scale = scale;
             _isVisible = isVisible;
-            _filePath = filePath;
-            _texture = Raylib.LoadTexture(_filePath);
+            _texture = AssetManager.GetTexture(textureName);
             // set filter for pixel art sharpness
             Raylib.SetTextureFilter(_texture, TextureFilter.Point);
 
@@ -39,12 +39,6 @@ namespace VGP133_Final_Assignment.Components
             }
         }
 
-        public void Unload()
-        {
-            Raylib.UnloadTexture(_texture);
-        }
-
-        private string _filePath;
         private Texture2D _texture;
         private Color _tint = Color.RayWhite;
 
@@ -56,6 +50,5 @@ namespace VGP133_Final_Assignment.Components
         public Vector2 Position { get => _position; set => _position = value; }
         public float Scale { get => _scale; set => _scale = value; }
         public bool IsVisible { get => _isVisible; set => _isVisible = value; }
-        public string FilePath { get => _filePath; set => _filePath = value; }
     }
 }
