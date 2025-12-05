@@ -33,19 +33,11 @@ namespace VGP133_Final_Assignment.Components
             // check hover
             _isMouseHovering = Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _hitbox);
 
-            if (_isMouseHovering)
-            {
-                _texture.IsVisible = true;
-            }
-            else
-            {
-                _texture.IsVisible = false;
-            }
+            _texture.IsVisible = _isMouseHovering;
 
             // toggle is clicked
             if (_isMouseHovering && Raylib.IsMouseButtonPressed(MouseButton.Left))
             {
-                Console.WriteLine("Clicked Button");
                 _isPressed = true;
             }
 
