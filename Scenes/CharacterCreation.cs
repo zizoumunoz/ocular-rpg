@@ -22,12 +22,10 @@ namespace VGP133_Final_Assignment.Scenes
             _background =
             new Sprite("book", new System.Numerics.Vector2(0f, 0f), 5f);
 
-            string temp = "selected_left_heart";
             _classSelectLeft =
-                new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 226 * _uiScale, 12 * _uiScale, temp);
-            temp = "selected_right_heart";
+                new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 226 * _uiScale, 12 * _uiScale, "selected_left_heart");
             _classSelectRight =
-                new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 323 * _uiScale, 12 * _uiScale, temp);
+                new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 323 * _uiScale, 12 * _uiScale, "selected_right_heart");
 
             _player = new Character(new Vector2(256, 79));
         }
@@ -138,9 +136,16 @@ namespace VGP133_Final_Assignment.Scenes
             Raylib.DrawText($"Current age: {(int)_currentAge}", 0, 60, 20, Color.Black);
 
             RenderCurrentClass();
-
+            RenderStats();
             _player.Render();
 
+        }
+
+        private void RenderStats()
+        {
+            Raylib.DrawText($"{_player.CurrentHp}", 202 * _uiScale, 75 * _uiScale, 9 * _uiScale, _textColor);
+            Raylib.DrawText($"{_player.Atk}", 202 * _uiScale, 98 * _uiScale, 9 * _uiScale, _textColor);
+            Raylib.DrawText($"{_player.Def}", 202 * _uiScale, 124 * _uiScale, 9 * _uiScale, _textColor);
         }
 
         /// <summary>
@@ -239,6 +244,7 @@ namespace VGP133_Final_Assignment.Scenes
                 _classSelectLeft.IsPressed = false;
                 Console.WriteLine($"Current class: {_player.PlayerClass}");
                 _player.UpdateSprite();
+                _player.UpdateStats();
             }
             else if (_classSelectRight.IsPressed)
             {
@@ -258,6 +264,7 @@ namespace VGP133_Final_Assignment.Scenes
                 }
                 _classSelectRight.IsPressed = false;
                 _player.UpdateSprite();
+                _player.UpdateStats();
             }
         }
 
@@ -284,6 +291,8 @@ namespace VGP133_Final_Assignment.Scenes
 
             Raylib.DrawText(classString, 249 * _uiScale, 13 * _uiScale, 20 * _uiScale, new Color(178, 139, 120));
         }
+
+        private static Color _textColor = new Color(178, 139, 120);
 
         private HairColor _currentHairColor = HairColor.Pink;
         private Age _currentAge = Age.Young;

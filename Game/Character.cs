@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Text;
 using VGP133_Final_Assignment.Components;
 
@@ -25,11 +26,39 @@ namespace VGP133_Final_Assignment.Game
             _playerCloak = new Sprite("clothes_wizard", _spriteLocation + _cloaksOffset, 5);
             _playerFace = new Sprite("face_young", _spriteLocation + _faceYoungOffest, 5);
 
+            _atk = 10;
+            _def = 5;
+            _currentHp = 150;
+
         }
 
         public void Update()
         {
 
+        }
+
+        public void UpdateStats()
+        {
+            switch (PlayerClass)
+            {
+                case Class.Knight:
+                    _atk = 5;
+                    _def = 10;
+                    _currentHp = 200;
+                    break;
+                case Class.Jester:
+                    _atk = 5;
+                    _def = 5;
+                    _currentHp = 100;
+                    break;
+                case Class.Wizard:
+                    _atk = 10;
+                    _def = 5;
+                    _currentHp = 150;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void UpdateSprite()
@@ -136,6 +165,14 @@ namespace VGP133_Final_Assignment.Game
 
         }
 
+        // ===== Player Stats
+        private const int _maxHp = 500;
+        private int _currentHp;
+        private int _atk;
+        private int _def;
+        private int _level;
+        private int _xp;
+
         private Vector2 _spriteLocation;
 
         private Sprite _playerCloak;
@@ -163,11 +200,16 @@ namespace VGP133_Final_Assignment.Game
         private Age _age;
         private Class _playerClass;
         
-
         public HairColor HairColor { get => _hairColor; set => _hairColor = value; }
         public Gender Gender { get => _gender; set => _gender = value; }
         public Age Age { get => _age; set => _age = value; }
         public Class PlayerClass { get => _playerClass; set => _playerClass = value; }
         public Vector2 SpriteLocation { get => _spriteLocation; set => _spriteLocation = value; }
+        public int MaxHp { get => _maxHp; }
+        public int CurrentHp { get => _currentHp; set => _currentHp = value; }
+        public int Atk { get => _atk; set => _atk = value; }
+        public int Def { get => _def; set => _def = value; }
+        public int Level { get => _level; set => _level = value; }
+        public int Xp { get => _xp; set => _xp = value; }
     }
 }
