@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using Raylib_cs;
+using VGP133_Final_Assignment.Interfaces;
 
 namespace VGP133_Final_Assignment.Components
 {
-    public class ButtonCircle
+    public class ButtonCircle : IDrawable
     {
         public ButtonCircle(float radius, int xCoordinate, int yCoordinate)
         {
@@ -15,12 +16,14 @@ namespace VGP133_Final_Assignment.Components
             _yCoordinate = yCoordinate;
         }
 
+        // IDrawable
         public void Update()
         {
             _isMouseColliding = Raylib.CheckCollisionPointCircle(Raylib.GetMousePosition(), new Vector2(_xCoordinate, _yCoordinate), _radius);
             _isPressed = (_isMouseColliding && Raylib.IsMouseButtonPressed(MouseButton.Left));
         }
 
+        // IDrawable
         public void Render()
         {
             Raylib.DrawCircle(_xCoordinate, _yCoordinate, _radius, new Color(0, 0, 0, 0));

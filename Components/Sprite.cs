@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using VGP133_Final_Assignment.Core;
+using VGP133_Final_Assignment.Interfaces;
 
 namespace VGP133_Final_Assignment.Components
 {
-    public class Sprite
+    public class Sprite : IDrawable
     {
-
         public Sprite(string textureName, Vector2 position, float scale = 1f, bool isVisible = true)
         {
             _position = position;
@@ -21,11 +21,13 @@ namespace VGP133_Final_Assignment.Components
 
         }
 
+        // IDrawable inherit
         public void Render()
         {
             Raylib.DrawTextureEx(_texture, _position, 0f, _scale, _tint);
         }
 
+        // IDrawable inherit
         public void Update()
         {
             switch (_isVisible)
@@ -45,7 +47,6 @@ namespace VGP133_Final_Assignment.Components
         private Vector2 _position;
         private float _scale;
         private bool _isVisible;
-
 
         public Vector2 Position { get => _position; set => _position = value; }
         public float Scale { get => _scale; set => _scale = value; }

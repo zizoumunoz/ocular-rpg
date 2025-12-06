@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Raylib_cs;
+using VGP133_Final_Assignment.Interfaces;
 
 namespace VGP133_Final_Assignment.Components
 {
-    public class TextInput
+    public class TextInput : IDrawable
     {
         public TextInput(int length, int height, int xCoord, int yCoord)
         {
@@ -17,6 +18,7 @@ namespace VGP133_Final_Assignment.Components
             _maxChars = 18;
         }
 
+        // IDrawable
         public void Update()
         {
             _isMouseOnText = Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), _box);
@@ -58,6 +60,7 @@ namespace VGP133_Final_Assignment.Components
             else { _framesCounter = 0; }
         }
 
+        // IDrawable
         public void Render()
         {
             Raylib.DrawRectangleRec(_box, new Color(0, 0, 0, 0));

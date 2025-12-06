@@ -128,7 +128,7 @@ namespace VGP133_Final_Assignment.Game
                     break;
                 case Class.Jester:
                     _playerHat = new Sprite("hat_jester", _spriteLocation + _hatJesterOffset, 5);
-                    _playerCloak = new Sprite("clothes_default", _spriteLocation + _cloaksOffset, 5);
+                    _playerCloak = new Sprite("clothes_jester", _spriteLocation + _cloaksOffset, 5);
                     break;
                 case Class.Wizard:
                     _playerHat = new Sprite("hat_wizard", _spriteLocation + _hatWizardOffset, 5);

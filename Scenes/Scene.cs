@@ -4,10 +4,11 @@ using System.Net.Mail;
 using System.Text;
 using VGP133_Final_Assignment.Components;
 using VGP133_Final_Assignment.Core;
+using VGP133_Final_Assignment.Interfaces;
 
 namespace VGP133_Final_Assignment.Scenes
 {
-    public abstract class Scene
+    public abstract class Scene : IDrawable
     {
         public Scene(SceneHandler sceneHandler)
         {

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Numerics;
 using Raylib_cs;
+using VGP133_Final_Assignment.Interfaces;
 
 namespace VGP133_Final_Assignment.Components
 {
-    public class ButtonRectangle
+    public class ButtonRectangle : IDrawable
     {
         public ButtonRectangle(int length, int height, int x, int y, string texturePath, bool render = false)
         {
@@ -28,6 +29,7 @@ namespace VGP133_Final_Assignment.Components
             }
         }
 
+        // IDrawable
         public void Update()
         {
             // check hover
@@ -40,10 +42,10 @@ namespace VGP133_Final_Assignment.Components
             {
                 _isPressed = true;
             }
-
             _texture.Update();
         }
 
+        // IDrawable
         public void Render()
         {
             Raylib.DrawRectangle(_x, _y, _width, _height, _color);
