@@ -7,10 +7,9 @@ namespace VGP133_Final_Assignment.Core
 {
     public static class AssetManager
     {
-        public static void LoadAssets()
+        public static void LoadAssets(string assetFolder)
         {
             // character_creation assets
-            string assetFolder = "Assets/character_creation";
             string[] files = Directory.GetFiles(assetFolder, "*.png");
 
             foreach (var file in files)

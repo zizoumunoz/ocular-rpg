@@ -18,7 +18,8 @@ namespace VGP133_Final_Assignment.Core
 
         public void Run()
         {
-            AssetManager.LoadAssets();
+            AssetManager.LoadAssets("Assets/character_creation");
+            AssetManager.LoadAssets("Assets/world_map");
 
             while (!Raylib.WindowShouldClose())
             {
