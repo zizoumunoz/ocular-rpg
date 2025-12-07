@@ -1,4 +1,5 @@
 ﻿using VGP133_Final_Assignment.Core;
+using Raylib_cs;
 
 namespace VGP133_Final_Assignment.Scenes
 {
@@ -10,12 +11,13 @@ namespace VGP133_Final_Assignment.Scenes
 
         public override void Render()
         {
-            throw new NotImplementedException();
+            Raylib.ClearBackground(Color.RayWhite);
+            Raylib.DrawText("WorldMap Scene", 0, 0, 20, Color.Black);
         }
 
         public override void Update()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

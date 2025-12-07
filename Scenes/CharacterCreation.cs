@@ -26,7 +26,7 @@ namespace VGP133_Final_Assignment.Scenes
                 new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 226 * _uiScale, 12 * _uiScale, "selected_left_heart");
             _classSelectRight =
                 new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 323 * _uiScale, 12 * _uiScale, "selected_right_heart");
-
+                
             _player = new Character(new Vector2(256, 79));
         }
 
