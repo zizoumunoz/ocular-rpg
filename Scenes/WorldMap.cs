@@ -1,7 +1,9 @@
 ﻿using System.Numerics;
-using VGP133_Final_Assignment.Core;
 using Raylib_cs;
+using VGP133_Final_Assignment.Core;
 using VGP133_Final_Assignment.Components;
+using static VGP133_Final_Assignment.Core.ResolutionManager;    // for UIScale
+
 
 namespace VGP133_Final_Assignment.Scenes
 {
@@ -33,13 +35,13 @@ namespace VGP133_Final_Assignment.Scenes
         // Sprites
 
         Sprite _background =
-            new Sprite("world_background", s_origin, _uiScale);
+            new Sprite("world_background", s_origin, UIScale);
         Sprite _borders =
-            new Sprite("world_borders", s_origin, _uiScale);
+            new Sprite("world_borders", s_origin, UIScale);
         Sprite _buttons =
-            new Sprite("world_buttons", s_origin, _uiScale);
+            new Sprite("world_buttons", s_origin, UIScale);
         Sprite _statusWindows =
-            new Sprite("world_status_window", s_origin, _uiScale);
+            new Sprite("world_status_window", s_origin, UIScale);
 
     }
 }
