@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Numerics;
+using System.Text.Json;
+using System.IO;
 using Raylib_cs;
 using VGP133_Final_Assignment.Components;
 using VGP133_Final_Assignment.Core;
@@ -27,6 +25,11 @@ namespace VGP133_Final_Assignment.Scenes
                 new ButtonRectangle(18, 22, 226, 12, "selected_left_heart");
             _classSelectRight =
                 new ButtonRectangle(18, 22, 323, 12, "selected_right_heart");
+
+            _forwardArrow =
+                new ButtonRectangle(16, 17, 339, 165, "selected_forward");
+            _backArrow =
+                new ButtonRectangle(16, 17, 32, 161, "selected_back");
 
             _player = new Character(new Vector2(256, 79));
         }
@@ -107,6 +110,11 @@ namespace VGP133_Final_Assignment.Scenes
             UpdateCurrentClass();
 
             UpdateSelects();
+
+            _backArrow.Update();
+            _forwardArrow.Update();
+            CheckForwardArrow();
+            CheckBackArrow();
         }
 
         public override void Render()
@@ -135,6 +143,8 @@ namespace VGP133_Final_Assignment.Scenes
 
             RenderCurrentClass();
             RenderStats();
+            _backArrow.Render();
+            _forwardArrow.Render();
             _player.Render();
 
         }
@@ -303,6 +313,31 @@ namespace VGP133_Final_Assignment.Scenes
             Raylib.DrawText(classString, 249 * UIScale, 13 * UIScale, 20 * UIScale, new Color(178, 139, 120));
         }
 
+        private void CheckForwardArrow()
+        {
+            if (_forwardArrow.IsPressed)
+            {
+                // save character logic
+                Console.WriteLine("Serialzing player");
+                Console.WriteLine($"Class {_player.PlayerClass}");
+                Console.WriteLine($"Gender {_player.Gender}");
+                Console.WriteLine($"Age {_player.Age}");
+                Console.WriteLine($"HairColor {_player.HairColor}");
+                string json = JsonSerializer.Serialize(_player, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText("player.json", json);
+                _forwardArrow.IsPressed = false;
+                Handler.CurrentScene = new WorldMap(Handler);
+            }
+        }
+
+        private void CheckBackArrow()
+        {
+            if (_backArrow.IsPressed)
+            {
+                Handler.CurrentScene = new MainMenu(Handler);
+            }
+        }
+
         private static Color _textColor = new Color(178, 139, 120);
 
         private HairColor _currentHairColor = HairColor.Pink;
@@ -351,5 +386,8 @@ namespace VGP133_Final_Assignment.Scenes
         // Hitboxes
         private ButtonRectangle _classSelectLeft;
         private ButtonRectangle _classSelectRight;
+
+        private ButtonRectangle _forwardArrow;
+        private ButtonRectangle _backArrow;
     }
 }
