@@ -1,20 +1,21 @@
 ﻿using System.Numerics;
 using Raylib_cs;
 using VGP133_Final_Assignment.Interfaces;
+using static VGP133_Final_Assignment.Core.ResolutionManager;
 
 namespace VGP133_Final_Assignment.Components
 {
     public class ButtonRectangle : IDrawable
     {
-        public ButtonRectangle(int length, int height, int x, int y, string texturePath, bool render = false)
+        public ButtonRectangle(int width, int height, int x, int y, string texturePath, bool render = false)
         {
-            _width = length;
-            _height = height;
-            _x = x;
-            _y = y;
-            _hitbox = new Rectangle(x, y, length, height);
+            _width = width * UIScale;
+            _height = height * UIScale;
+            _x = x * UIScale;
+            _y = y * UIScale;
+            _hitbox = new Rectangle(_x, _y, _width, _height);
             _texture =
-                new Sprite(texturePath, new Vector2(x, y), 5);
+                new Sprite(texturePath, new Vector2(x, y));
 
             if (render)
             {

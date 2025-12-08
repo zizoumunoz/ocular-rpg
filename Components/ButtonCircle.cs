@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
+﻿using System.Numerics;
 using Raylib_cs;
 using VGP133_Final_Assignment.Interfaces;
+using static VGP133_Final_Assignment.Core.ResolutionManager;
 
 namespace VGP133_Final_Assignment.Components
 {
@@ -12,8 +10,8 @@ namespace VGP133_Final_Assignment.Components
         public ButtonCircle(float radius, int xCoordinate, int yCoordinate)
         {
             _radius = radius;
-            _xCoordinate = xCoordinate;
-            _yCoordinate = yCoordinate;
+            _xCoordinate = xCoordinate * UIScale;
+            _yCoordinate = yCoordinate * UIScale;
         }
 
         // IDrawable

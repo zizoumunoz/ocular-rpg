@@ -1,19 +1,16 @@
 ﻿using Raylib_cs;
-using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 using VGP133_Final_Assignment.Core;
 using VGP133_Final_Assignment.Interfaces;
+using static VGP133_Final_Assignment.Core.ResolutionManager;
 
 namespace VGP133_Final_Assignment.Components
 {
     public class Sprite : IDrawable
     {
-        public Sprite(string textureName, Vector2 position, float scale = 1f, bool isVisible = true)
+        public Sprite(string textureName, Vector2 position, bool isVisible = true)
         {
             _position = position;
-            _scale = scale;
             _isVisible = isVisible;
             _offset = new Vector2(0, 0);
             _texture = AssetManager.GetTexture(textureName);
@@ -25,7 +22,7 @@ namespace VGP133_Final_Assignment.Components
         // IDrawable inherit
         public void Render()
         {
-            Raylib.DrawTextureEx(_texture, (_position + _offset) * _scale, 0f, _scale, _tint);
+            Raylib.DrawTextureEx(_texture, (_position + _offset) * UIScale, 0f, UIScale, _tint);
         }
 
         // IDrawable inherit

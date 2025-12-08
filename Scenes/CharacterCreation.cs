@@ -7,6 +7,7 @@ using Raylib_cs;
 using VGP133_Final_Assignment.Components;
 using VGP133_Final_Assignment.Core;
 using VGP133_Final_Assignment.Game;
+using static VGP133_Final_Assignment.Core.ResolutionManager;
 
 namespace VGP133_Final_Assignment.Scenes
 {
@@ -20,12 +21,12 @@ namespace VGP133_Final_Assignment.Scenes
         {
             SceneName = "Character Creation";
             _background =
-                new Sprite("book", s_origin, 5f);
+                new Sprite("book", s_origin);
 
             _classSelectLeft =
-                new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 226 * _uiScale, 12 * _uiScale, "selected_left_heart");
+                new ButtonRectangle(18, 22, 226, 12, "selected_left_heart");
             _classSelectRight =
-                new ButtonRectangle(18 * _uiScale, 22 * _uiScale, 323 * _uiScale, 12 * _uiScale, "selected_right_heart");
+                new ButtonRectangle(18, 22, 323, 12, "selected_right_heart");
 
             _player = new Character(new Vector2(256, 79));
         }
@@ -140,9 +141,9 @@ namespace VGP133_Final_Assignment.Scenes
 
         private void RenderStats()
         {
-            Raylib.DrawText($"{_player.CurrentHp}", 202 * _uiScale, 75 * _uiScale, 9 * _uiScale, _textColor);
-            Raylib.DrawText($"{_player.Atk}", 202 * _uiScale, 98 * _uiScale, 9 * _uiScale, _textColor);
-            Raylib.DrawText($"{_player.Def}", 202 * _uiScale, 124 * _uiScale, 9 * _uiScale, _textColor);
+            Raylib.DrawText($"{_player.CurrentHp}", 202 * UIScale, 75 * UIScale, 9 * UIScale, _textColor);
+            Raylib.DrawText($"{_player.Atk}", 202 * UIScale, 98 * UIScale, 9 * UIScale, _textColor);
+            Raylib.DrawText($"{_player.Def}", 202 * UIScale, 124 * UIScale, 9 * UIScale, _textColor);
         }
 
         /// <summary>
@@ -299,7 +300,7 @@ namespace VGP133_Final_Assignment.Scenes
 
             }
 
-            Raylib.DrawText(classString, 249 * _uiScale, 13 * _uiScale, 20 * _uiScale, new Color(178, 139, 120));
+            Raylib.DrawText(classString, 249 * UIScale, 13 * UIScale, 20 * UIScale, new Color(178, 139, 120));
         }
 
         private static Color _textColor = new Color(178, 139, 120);
@@ -309,45 +310,43 @@ namespace VGP133_Final_Assignment.Scenes
         private Gender _currentGender = Gender.Masc;
         private Class _currentClass = Class.Knight;
 
-        private const int _uiScale = 5;
-
         private Character _player;
 
         // Sprites
         private Sprite _background;
         private Sprite _uiHairSelect =
-            new Sprite("selected_circle", s_origin, _uiScale);
+            new Sprite("selected_circle", s_origin);
         private Sprite _uiGenderSelect =
-            new Sprite("selected_circle", s_origin, _uiScale);
+            new Sprite("selected_circle", s_origin);
         private Sprite _uiAgeSelect =
-            new Sprite("selected_circle", s_origin, _uiScale);
+            new Sprite("selected_circle", s_origin);
 
         private TextInput _nameBox = new TextInput(540, 51, 248, 112);
 
-        private ButtonCircle _hairButtonA = new ButtonCircle(61, 74 * _uiScale, 70 * _uiScale);
-        private ButtonCircle _hairButtonB = new ButtonCircle(61, 104 * _uiScale, 68 * _uiScale);
-        private ButtonCircle _hairButtonC = new ButtonCircle(61, 134 * _uiScale, 70 * _uiScale);
+        private ButtonCircle _hairButtonA = new ButtonCircle(61, 74, 70);
+        private ButtonCircle _hairButtonB = new ButtonCircle(61, 104, 68);
+        private ButtonCircle _hairButtonC = new ButtonCircle(61, 134, 70);
 
-        private ButtonCircle _genderButtonA = new ButtonCircle(61, 74 * _uiScale, 550);
-        private ButtonCircle _genderButtonB = new ButtonCircle(61, 104 * _uiScale, 540);
-        private ButtonCircle _genderButtonC = new ButtonCircle(61, 134 * _uiScale, 550);
+        private ButtonCircle _genderButtonA = new ButtonCircle(61, 74, 110);
+        private ButtonCircle _genderButtonB = new ButtonCircle(61, 104, 108);
+        private ButtonCircle _genderButtonC = new ButtonCircle(61, 134, 110);
 
-        private ButtonCircle _ageButtonA = new ButtonCircle(61, 74 * _uiScale, 750);
-        private ButtonCircle _ageButtonB = new ButtonCircle(61, 104 * _uiScale, 740);
-        private ButtonCircle _ageButtonC = new ButtonCircle(61, 134 * _uiScale, 750);
+        private ButtonCircle _ageButtonA = new ButtonCircle(61, 74, 150);
+        private ButtonCircle _ageButtonB = new ButtonCircle(61, 104, 148);
+        private ButtonCircle _ageButtonC = new ButtonCircle(61, 134, 150);
 
         // Locations for selections
-        private Vector2 _hairA = new Vector2(61 * _uiScale, 57 * _uiScale);
-        private Vector2 _hairB = new Vector2(91 * _uiScale, 55 * _uiScale);
-        private Vector2 _hairC = new Vector2(121 * _uiScale, 57 * _uiScale);
+        private Vector2 _hairA = new Vector2(61, 57);
+        private Vector2 _hairB = new Vector2(91, 55);
+        private Vector2 _hairC = new Vector2(121, 57);
 
-        private Vector2 _genderA = new Vector2(61 * _uiScale, 97 * _uiScale);
-        private Vector2 _genderB = new Vector2(91 * _uiScale, 95 * _uiScale);
-        private Vector2 _genderC = new Vector2(121 * _uiScale, 97 * _uiScale);
+        private Vector2 _genderA = new Vector2(61, 97);
+        private Vector2 _genderB = new Vector2(91, 95);
+        private Vector2 _genderC = new Vector2(121, 97);
 
-        private Vector2 _ageA = new Vector2(61 * _uiScale, 137 * _uiScale);
-        private Vector2 _ageB = new Vector2(91 * _uiScale, 135 * _uiScale);
-        private Vector2 _ageC = new Vector2(121 * _uiScale, 137 * _uiScale);
+        private Vector2 _ageA = new Vector2(61, 137);
+        private Vector2 _ageB = new Vector2(91, 135);
+        private Vector2 _ageC = new Vector2(121, 137);
 
         // Hitboxes
         private ButtonRectangle _classSelectLeft;
