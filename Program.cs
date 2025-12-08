@@ -8,7 +8,7 @@ public static class Program
     [System.STAThread]
     public static void Main()
     {
-        Raylib.InitWindow(1920, 1080, "Hello World");
+        Raylib.InitWindow(1920, 1080, "Monocular");
         Raylib.SetTargetFPS(60);
 
         Game game = new Game();
