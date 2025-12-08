@@ -11,6 +11,9 @@ namespace VGP133_Final_Assignment.Scenes
     {
         public WorldMap(SceneHandler sceneHandler) : base(sceneHandler)
         {
+            _borders.Offset = new Vector2(24, 16);
+            _buttons.Offset = new Vector2(6, 145);
+            _statusWindows.Offset = new Vector2(32, 137);
         }
 
         public override void Update()
