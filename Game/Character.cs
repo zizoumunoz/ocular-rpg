@@ -11,12 +11,12 @@ namespace VGP133_Final_Assignment.Game
             _spriteLocation.Y = spriteLocation.Y;
 
             _playerClass = Class.Wizard;
-            _hairColor = HairColor.Pink;
+            _hairColor = HairColor.Yellow;
             _age = Age.Young;
             _gender = Gender.Masc;
 
             _playerBody = new Sprite("character_body", _spriteLocation);
-            _playerHair = new Sprite("hair_pink_boy", _spriteLocation + _hairBoyOffset);
+            _playerHair = new Sprite("hair_yellow_boy", _spriteLocation + _hairBoyOffset);
             _playerHat = new Sprite("hat_wizard", _spriteLocation + _hatWizardOffset);
             _playerCloak = new Sprite("clothes_wizard", _spriteLocation + _cloaksOffset);
             _playerFace = new Sprite("face_young", _spriteLocation + _faceYoungOffest);

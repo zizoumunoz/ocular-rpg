@@ -42,13 +42,13 @@ namespace VGP133_Final_Assignment.Scenes
             UpdateButtonGroup(_hairButtonA, _hairButtonB, _hairButtonC);
             if (_hairButtonA.IsPressed)
             {
-                _currentHairColor = HairColor.Pink;
+                _currentHairColor = HairColor.Yellow;
                 _player.HairColor = _currentHairColor;
                 _player.UpdateSprite();
             }
             else if (_hairButtonB.IsPressed)
             {
-                _currentHairColor = HairColor.Yellow;
+                _currentHairColor = HairColor.Pink;
                 _player.HairColor = _currentHairColor;
                 _player.UpdateSprite();
             }
@@ -163,10 +163,10 @@ namespace VGP133_Final_Assignment.Scenes
         {
             switch (_currentHairColor)
             {
-                case HairColor.Pink:
+                case HairColor.Yellow:
                     _uiHairSelect.Position = _hairA;
                     break;
-                case HairColor.Yellow:
+                case HairColor.Pink:
                     _uiHairSelect.Position = _hairB;
                     break;
                 case HairColor.Blue:
@@ -340,7 +340,7 @@ namespace VGP133_Final_Assignment.Scenes
 
         private static Color _textColor = new Color(178, 139, 120);
 
-        private HairColor _currentHairColor = HairColor.Pink;
+        private HairColor _currentHairColor = HairColor.Yellow;
         private Age _currentAge = Age.Young;
         private Gender _currentGender = Gender.Masc;
         private Class _currentClass = Class.Knight;
