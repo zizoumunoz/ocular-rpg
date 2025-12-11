@@ -1,0 +1,24 @@
+﻿using System.Numerics;
+using VGP133_Final_Assignment.Components;
+
+namespace VGP133_Final_Assignment.Game
+{
+    public class Mountain : Terrain
+    {
+        public Mountain(Vector2 location, List<Monster>? monsterPool) :
+            base(location, monsterPool)
+        {
+            _name = "Ocean";
+            _location = location;
+            _sprite = new Sprite("terrain_mountain", _location);
+        }
+        public override void Update()
+        {
+            throw new NotImplementedException();
+        }
+        public override void Render()
+        {
+            _sprite.Render();
+        }
+    }
+}
