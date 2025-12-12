@@ -2,9 +2,9 @@
 using Raylib_cs;
 using VGP133_Final_Assignment.Core;
 using VGP133_Final_Assignment.Components;
-using static VGP133_Final_Assignment.Core.ResolutionManager; // for UIScale
 using VGP133_Final_Assignment.Game;
 using System.Text.Json;
+using static VGP133_Final_Assignment.Core.ResolutionManager; // for UIScale
 
 
 namespace VGP133_Final_Assignment.Scenes
@@ -24,9 +24,6 @@ namespace VGP133_Final_Assignment.Scenes
             _player.SpriteLocation = new Vector2(164, 146);
             _player.HasOutline = true;
             _player.UpdateSprite();
-
-            _monsters = new List<Monster>();
-            _forest = new Forest(new Vector2(235, 51), _monsters);
         }
 
         public override void Update()
@@ -38,6 +35,8 @@ namespace VGP133_Final_Assignment.Scenes
         {
             Raylib.ClearBackground(Color.Black);
 
+            _map.Render();
+
             _background.Render();
             _borders.Render();
             _buttons.Render();
@@ -48,20 +47,17 @@ namespace VGP133_Final_Assignment.Scenes
             Raylib.DrawText($"{_player.Atk}", 87 * UIScale, 192 * UIScale, 10 * UIScale, new Color(178, 139, 120));
             Raylib.DrawText($"{_player.Def}", 128 * UIScale, 192 * UIScale, 10 * UIScale, new Color(178, 139, 120));
 
-            _forest.Render();
-
             _player.Render();
-        }
 
+
+        }
         private void DisplayCurrentLocation()
         {
 
         }
 
         private Character? _player;
-
-        // Game Data
-        
+        private Map _map = new Map();
 
         // Sprites
         Sprite _background =
@@ -72,11 +68,5 @@ namespace VGP133_Final_Assignment.Scenes
             new Sprite("world_buttons", s_origin);
         Sprite _statusWindows =
             new Sprite("world_status_window", s_origin);
-
-        // Map Data
-        Forest _forest;
-
-
-        List<Monster> _monsters;
     }
 }
