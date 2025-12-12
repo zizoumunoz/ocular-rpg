@@ -68,10 +68,6 @@ namespace VGP133_Final_Assignment.Scenes
 
 
         }
-        private void DisplayCurrentLocation()
-        {
-
-        }
 
         private Character? _player;
         private Map _map = new Map();
