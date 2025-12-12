@@ -24,6 +24,10 @@ namespace VGP133_Final_Assignment.Scenes
             _player.SpriteLocation = new Vector2(164, 146);
             _player.HasOutline = true;
             _player.UpdateSprite();
+            _currentTile =
+                _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
+            _terrainBackground =
+                new Text(_currentTile.Name, new Vector2(52, 42), 20, Color.Red);
         }
 
         public override void Update()
@@ -33,15 +37,19 @@ namespace VGP133_Final_Assignment.Scenes
             {
                 case KeyboardKey.Up:
                     _map.MovePlayer('N');
+                    UpdateCurrentTile();
                     break;
                 case KeyboardKey.Down:
                     _map.MovePlayer('S');
+                    UpdateCurrentTile();
                     break;
                 case KeyboardKey.Left:
                     _map.MovePlayer('W');
+                    UpdateCurrentTile();
                     break;
                 case KeyboardKey.Right:
                     _map.MovePlayer('E');
+                    UpdateCurrentTile();
                     break;
                 default:
                     break;
@@ -64,9 +72,46 @@ namespace VGP133_Final_Assignment.Scenes
             Raylib.DrawText($"{_player.Atk}", 87 * UIScale, 192 * UIScale, 10 * UIScale, new Color(178, 139, 120));
             Raylib.DrawText($"{_player.Def}", 128 * UIScale, 192 * UIScale, 10 * UIScale, new Color(178, 139, 120));
 
+            RenderTerrainBackground();
+
             _player.Render();
 
+        }
 
+        private void UpdateCurrentTile()
+        {
+            _currentTile = _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
+            Console.WriteLine(_currentTile.Name);
+        }
+
+        private void RenderTerrainBackground()
+        {
+
+            switch (_currentTile.Name)
+            {
+                case "Ocean":
+                    _terrainBackground.TextData = _currentTile.Name;
+                    _terrainBackground.Render();
+                    break;
+                case "Village":
+                    _terrainBackground.TextData = _currentTile.Name;
+                    _terrainBackground.Render();
+                    break;
+                case "Forest":
+                    _terrainBackground.TextData = _currentTile.Name;
+                    _terrainBackground.Render();
+                    break;
+                case "Mountain":
+                    _terrainBackground.TextData = _currentTile.Name;
+                    _terrainBackground.Render();
+                    break;
+                case "Castle":
+                    _terrainBackground.TextData = _currentTile.Name;
+                    _terrainBackground.Render();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private Character? _player;
@@ -81,5 +126,8 @@ namespace VGP133_Final_Assignment.Scenes
             new Sprite("world_buttons", s_origin);
         Sprite _statusWindows =
             new Sprite("world_status_window", s_origin);
+        Text _terrainBackground;
+        Terrain _currentTile;
+
     }
 }
