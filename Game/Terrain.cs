@@ -16,12 +16,12 @@ namespace VGP133_Final_Assignment.Game
 
         public abstract void Update();
 
-        private string _name = "";
-        private Vector2 _location;
+        protected string _name = "";
+        protected Vector2 _location;
         protected Sprite? _sprite;
         protected List<Monster> _monsterPool;
 
-        protected string Name { get => _name; set => _name = value; }
-        protected Vector2 Location { get => _location; set => _location = value; }
+        public string Name { get => _name; set => _name = value; }
+        public Vector2 Location { get => _location; set => _location = value; }
     }
 }
