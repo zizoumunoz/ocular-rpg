@@ -20,6 +20,7 @@ namespace VGP133_Final_Assignment.Game
         protected Vector2 _location;
         protected Sprite? _sprite;
         protected List<Monster> _monsterPool;
+        protected float _rewardChance;
 
         public string Name { get => _name; set => _name = value; }
         public Vector2 Location { get => _location; set => _location = value; }
