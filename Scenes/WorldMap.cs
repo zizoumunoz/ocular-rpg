@@ -57,6 +57,8 @@ namespace VGP133_Final_Assignment.Scenes
                 default:
                     break;
             }
+
+            _viewportLeft.Update();
         }
 
         public override void Render()

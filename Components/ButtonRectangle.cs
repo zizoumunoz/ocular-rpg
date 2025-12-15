@@ -14,6 +14,7 @@ namespace VGP133_Final_Assignment.Components
             _x = x * UIScale;
             _y = y * UIScale;
             _posRaw = new Vector2(x, y);
+            _dimRaw = new Vector2(width, height);
             _hitbox = new Rectangle(_x, _y, _width, _height);
             _texture =
                 new Sprite(texturePath, new Vector2(x, y));
@@ -30,14 +31,14 @@ namespace VGP133_Final_Assignment.Components
 
         public ButtonRectangle(Vector2 dimensions, Vector2 position, string texturePath, bool render = false)
         {
-            _width = (int)dimensions.X * UIScale;
-            _height = (int)dimensions.Y * UIScale;
-            _x = (int)position.X * UIScale;
-            _y = (int)position.Y * UIScale;
-            _posRaw = new Vector2(_x, _y);
-            _hitbox = new Rectangle(_x, _y, _width, _height);
+            _width = (int)dimensions.X;
+            _height = (int)dimensions.Y;
+            _posRaw = position;
+            _x = (int)position.X;
+            _y = (int)position.Y;
+            _hitbox = new Rectangle(_x * UIScale, _y * UIScale, _width * UIScale, _height * UIScale);
             _texture =
-                new Sprite(texturePath, new Vector2(_x, _y));
+                new Sprite(texturePath, _posRaw);
 
             if (render)
             {
@@ -68,7 +69,7 @@ namespace VGP133_Final_Assignment.Components
         // IDrawable
         public void Render()
         {
-            Raylib.DrawRectangle(_x, _y, _width, _height, _color);
+            Raylib.DrawRectangleV(_posRaw * UIScale, _dimRaw * UIScale, _color);
             _texture.Render();
         }
 
@@ -79,6 +80,7 @@ namespace VGP133_Final_Assignment.Components
         private Color _color;
 
         private Vector2 _posRaw;
+        private Vector2 _dimRaw;
         private int _width;
         private int _height;
         private int _x;
