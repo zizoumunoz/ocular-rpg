@@ -51,8 +51,8 @@ namespace VGP133_Final_Assignment.Game
             _mapTiles[3, 4] =
                 new Mountain(new Vector2(325, 111), _monsters);
 
-            _playerPixelLocation = _mapTiles[0, 2].Location;
-            _playerTileLocation = new Vector2(2, 0);
+            _playerPixelLocation = _mapTiles[2, 0].Location;
+            _playerTileLocation = new Vector2(0, 2);
 
             _playerSprite = new Text(
                 "x",
@@ -115,8 +115,6 @@ namespace VGP133_Final_Assignment.Game
 
             _playerSprite.Position =
                 _mapTiles[(int)_playerTileLocation.Y, (int)_playerTileLocation.X].Location;
-
-
         }
 
         private void RenderPlayer()

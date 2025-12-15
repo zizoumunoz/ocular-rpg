@@ -60,7 +60,6 @@ namespace VGP133_Final_Assignment.Scenes
         {
             Raylib.ClearBackground(Color.Black);
 
-
             _map.Render();
             _background.Render();
             _borders.Render();
@@ -74,8 +73,19 @@ namespace VGP133_Final_Assignment.Scenes
 
             RenderTerrainBackground();
 
-            _player.Render();
+            RenderTileButtons();
 
+            _player.Render();
+        }
+
+        public void RenderTileButtons()
+        {
+            _currentTile.ActionTopLeft.Render();
+            _currentTile.ActionTopRight.Render();
+            _currentTile.ActionBottomLeft.Render();
+            _currentTile.ActionBottomRight.Render();
+
+            _currentTile.RenderActionText();
         }
 
         private void UpdateCurrentTile()
