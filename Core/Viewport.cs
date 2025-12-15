@@ -2,29 +2,35 @@
 using System.Numerics;
 using VGP133_Final_Assignment.Interfaces;
 using static VGP133_Final_Assignment.Core.ResolutionManager;
+using static VGP133_Final_Assignment.Game.GameColors;
 
 namespace VGP133_Final_Assignment.Core
 {
     public class Viewport : IDrawable
     {
-        public Viewport(Vector2 position, Vector2 dimensions, bool isVisisble = false)
+        public Viewport(Vector2 position, Vector2 dimensions, bool isActive = false)
         {
             _position = position;
             _dimensions = dimensions;
-            _isVisible = isVisisble;
+            _body =
+                new Rectangle(_position * UIScale, _dimensions * UIScale);
+            _isActive = isActive;
         }
         public void Update()
         {
+            if (!_isActive) { return; }
         }
 
         public void Render()
         {
-            Raylib.DrawRectangleV(_position, _dimensions, Color.Red);
+            if (!_isActive) { return; }
+            Raylib.DrawRectangleRounded(_body, 0.1f, 1, LightBrown);
+            Raylib.DrawRectangleRoundedLinesEx(_body, 0.1f, 1, 10f, DarkBrown);
         }
-
 
         private Vector2 _position;
         private Vector2 _dimensions;
-        private bool _isVisible;
+        private Rectangle _body;
+        private bool _isActive;
     }
 }

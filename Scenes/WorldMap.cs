@@ -28,6 +28,9 @@ namespace VGP133_Final_Assignment.Scenes
                 _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
             _terrainBackground =
                 new Text(_currentTile.Name, new Vector2(52, 42), 20, Color.Red);
+
+            _viewportLeft =
+                new Viewport(new Vector2(45, 37), new Vector2(118, 118), true);
         }
 
         public override void Update()
@@ -75,7 +78,9 @@ namespace VGP133_Final_Assignment.Scenes
 
             RenderTileButtons();
 
+            _viewportLeft.Render();
             _player.Render();
+
         }
 
         public void RenderTileButtons()
@@ -125,6 +130,9 @@ namespace VGP133_Final_Assignment.Scenes
 
         private Character? _player;
         private Map _map = new Map();
+
+        // Viewports
+        Viewport _viewportLeft;
 
         // Sprites
         Sprite _background =
