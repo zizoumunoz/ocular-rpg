@@ -16,13 +16,17 @@ namespace VGP133_Final_Assignment.Core
             _closeButton =
                 new ButtonRectangle(new Vector2(8,8), position, "button_close", true);
             _body =
-                new Rectangle(_position, _dimensions);
+                new Rectangle(_position * UIScale, _dimensions * UIScale);
             _isActive = isActive;
         }
         public void Update()
         {
             if (!_isActive) { return; }
             _closeButton.Update();
+            if (_closeButton.IsPressed)
+            {
+                _isActive = false;
+            }
         }
 
         public void Render()
