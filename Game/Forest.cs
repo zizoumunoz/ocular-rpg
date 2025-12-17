@@ -36,7 +36,6 @@ namespace VGP133_Final_Assignment.Game
         {
             _sprite.Render();
         }
-
         public override void RenderActionText()
         {
             for (int i = 0; i < _actionsText.Length; i++)

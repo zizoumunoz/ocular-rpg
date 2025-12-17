@@ -29,8 +29,8 @@ namespace VGP133_Final_Assignment.Scenes
             _terrainBackground =
                 new Text(_currentTile.Name, new Vector2(52, 42), 20, Color.Red);
 
-            _viewportInventory =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), true);
+            _currentViewport =
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", true);
         }
 
         public override void Update()
@@ -40,18 +40,22 @@ namespace VGP133_Final_Assignment.Scenes
             {
                 case KeyboardKey.Up:
                     _map.MovePlayer('N');
+                    _currentViewport.IsActive = false;
                     UpdateCurrentTile();
                     break;
                 case KeyboardKey.Down:
                     _map.MovePlayer('S');
+                    _currentViewport.IsActive = false;
                     UpdateCurrentTile();
                     break;
                 case KeyboardKey.Left:
                     _map.MovePlayer('W');
+                    _currentViewport.IsActive = false;
                     UpdateCurrentTile();
                     break;
                 case KeyboardKey.Right:
                     _map.MovePlayer('E');
+                    _currentViewport.IsActive = false;
                     UpdateCurrentTile();
                     break;
                 default:
@@ -60,12 +64,10 @@ namespace VGP133_Final_Assignment.Scenes
 
             _currentTile.Update();
 
-            // UpdateTileButtons();
-
-            _viewportInventory.Update();
+            _currentViewport.Update();
             if (_currentTile.ActionBottomLeft.IsPressed)
             {
-                _viewportInventory.IsActive = true;
+                _currentViewport.IsActive = true;
             }
 
             _currentTile.ActionBottomLeft.IsPressed = false;
@@ -90,7 +92,7 @@ namespace VGP133_Final_Assignment.Scenes
 
             RenderTileButtons();
 
-            _viewportInventory.Render();
+            _currentViewport.Render();
             _player.Render();
 
         }
@@ -103,14 +105,6 @@ namespace VGP133_Final_Assignment.Scenes
             _currentTile.ActionBottomRight.Render();
 
             _currentTile.RenderActionText();
-        }
-
-        private void UpdateTileButtons()
-        {
-            _currentTile.ActionTopLeft.Update();
-            _currentTile.ActionTopRight.Update();
-            _currentTile.ActionBottomLeft.Update();
-            _currentTile.ActionBottomRight.Update();
         }
 
         private void UpdateCurrentTile()
@@ -152,7 +146,7 @@ namespace VGP133_Final_Assignment.Scenes
         private Map _map = new Map();
 
         // Viewports
-        Viewport _viewportInventory;
+        Viewport _currentViewport;
 
         // Sprites
         Sprite _background =
