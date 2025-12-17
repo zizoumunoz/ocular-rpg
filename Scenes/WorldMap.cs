@@ -24,6 +24,7 @@ namespace VGP133_Final_Assignment.Scenes
             _player.SpriteLocation = new Vector2(164, 146);
             _player.HasOutline = true;
             _player.UpdateSprite();
+            _map = new Map(_player);
             _currentTile =
                 _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
             _terrainBackground =
@@ -71,6 +72,8 @@ namespace VGP133_Final_Assignment.Scenes
             }
 
             _currentTile.ActionBottomLeft.IsPressed = false;
+
+
         }
 
         public override void Render()
@@ -143,7 +146,7 @@ namespace VGP133_Final_Assignment.Scenes
         }
 
         private Character? _player;
-        private Map _map = new Map();
+        private Map _map;
 
         // Viewports
         Viewport _currentViewport;

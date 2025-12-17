@@ -30,6 +30,10 @@ namespace VGP133_Final_Assignment.Game
             _actionBottomRight.Update();
             _actionTopLeft.Update();
             _actionTopRight.Update();
+            // Item shop    Weapon Shop
+            // Inn          Barber Shop
+            CheckBottomLeft();
+
         }
         public override void Render()
         {
@@ -42,6 +46,15 @@ namespace VGP133_Final_Assignment.Game
             {
                 _actionsText[i].Render();
             }
+        }
+        private void CheckBottomLeft()
+        {
+            if (_actionBottomLeft.IsPressed)
+            {
+                _player.CurrentHp = _player.MaxHp;
+                Console.WriteLine("Maxed out player hp");
+            }
+            _actionBottomLeft.IsPressed = false;
         }
     }
 }
