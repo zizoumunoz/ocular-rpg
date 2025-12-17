@@ -6,7 +6,8 @@ namespace VGP133_Final_Assignment.Game
 {
     public class Village : Terrain
     {
-        public Village(Vector2 location, List<Monster>? monsterPool) : base(location, monsterPool)
+        public Village(Vector2 location, List<Monster>? monsterPool, Character player)
+            : base(location, monsterPool, player)
         {
             _name = "Village";
             _location = location;

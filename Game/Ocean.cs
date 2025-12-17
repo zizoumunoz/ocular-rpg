@@ -5,8 +5,8 @@ namespace VGP133_Final_Assignment.Game
 {
     public class Ocean : Terrain
     {
-        public Ocean(Vector2 location, List<Monster>? monsterPool) :
-            base(location, monsterPool)
+        public Ocean(Vector2 location, List<Monster>? monsterPool, Character player)
+            : base(location, monsterPool, player)
         {
             _name = "Ocean";
             _location = location;

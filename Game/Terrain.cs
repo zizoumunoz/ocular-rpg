@@ -6,10 +6,11 @@ namespace VGP133_Final_Assignment.Game
 {
     public abstract class Terrain : IDrawable
     {
-        protected Terrain(Vector2 location, List<Monster>? monsterPool)
+        protected Terrain(Vector2 location, List<Monster>? monsterPool, Character player)
         {
             _location = location;
             _monsterPool = monsterPool;
+            _player = player;
 
             _actionTopLeft =
                new ButtonRectangle(62, 20, 234, 160, "", false);
@@ -32,6 +33,7 @@ namespace VGP133_Final_Assignment.Game
         protected Sprite? _sprite;
         protected List<Monster> _monsterPool;
         protected float _rewardChance;
+        protected Character _player;
 
         public string Name { get => _name; set => _name = value; }
         public Vector2 Location { get => _location; set => _location = value; }

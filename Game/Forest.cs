@@ -6,8 +6,8 @@ namespace VGP133_Final_Assignment.Game
 {
     public class Forest : Terrain
     {
-        public Forest(Vector2 location, List<Monster>? monsterPool) :
-            base(location, monsterPool)
+        public Forest(Vector2 location, List<Monster>? monsterPool, Character player)
+            : base(location, monsterPool, player)
         {
             _name = "Forest";
             _location = location;

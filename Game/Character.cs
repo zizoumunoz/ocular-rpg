@@ -24,6 +24,8 @@ namespace VGP133_Final_Assignment.Game
             _atk = 10;
             _def = 5;
             _currentHp = 150;
+
+            _inventory = new Inventory();
         }
 
         public void Update()
@@ -175,6 +177,8 @@ namespace VGP133_Final_Assignment.Game
                 _playerHat.Render();
             }
         }
+
+        Inventory _inventory;
 
         // ===== Player Stats
         private const int _maxHp = 500;
