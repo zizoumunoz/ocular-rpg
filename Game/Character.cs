@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using VGP133_Final_Assignment.Components;
+using VGP133_Final_Assignment.Core;
 
 namespace VGP133_Final_Assignment.Game
 {
@@ -214,6 +215,7 @@ namespace VGP133_Final_Assignment.Game
         private Age _age;
         private Class _playerClass;
         private bool _hasOutline;
+        private Viewport _currentViewport;
 
         public HairColor HairColor { get => _hairColor; set => _hairColor = value; }
         public Gender Gender { get => _gender; set => _gender = value; }
@@ -227,5 +229,6 @@ namespace VGP133_Final_Assignment.Game
         public int Level { get => _level; set => _level = value; }
         public int Xp { get => _xp; set => _xp = value; }
         public bool HasOutline { get => _hasOutline; set => _hasOutline = value; }
+        public Viewport CurrentViewport { get => _currentViewport; set => _currentViewport = value; }
     }
 }

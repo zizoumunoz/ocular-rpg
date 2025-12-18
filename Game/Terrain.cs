@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using VGP133_Final_Assignment.Components;
+using VGP133_Final_Assignment.Core;
 using VGP133_Final_Assignment.Interfaces;
 
 namespace VGP133_Final_Assignment.Game
@@ -34,6 +35,7 @@ namespace VGP133_Final_Assignment.Game
         protected List<Monster> _monsterPool;
         protected float _rewardChance;
         protected Character _player;
+        protected Viewport _viewport;
 
         public string Name { get => _name; set => _name = value; }
         public Vector2 Location { get => _location; set => _location = value; }

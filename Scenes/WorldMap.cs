@@ -20,18 +20,22 @@ namespace VGP133_Final_Assignment.Scenes
             // get player from file
             string loadedJson = File.ReadAllText("player.json");
             _player = JsonSerializer.Deserialize<Character>(loadedJson);
-
             _player.SpriteLocation = new Vector2(164, 146);
             _player.HasOutline = true;
             _player.UpdateSprite();
+
+            _player.CurrentHp--;
+
+            // set map AFTER loading player
             _map = new Map(_player);
+
             _currentTile =
                 _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
             _terrainBackground =
                 new Text(_currentTile.Name, new Vector2(52, 42), 20, Color.Red);
 
             _currentViewport =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", true);
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", false);
         }
 
         public override void Update()

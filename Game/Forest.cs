@@ -1,6 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 using VGP133_Final_Assignment.Components;
+using VGP133_Final_Assignment.Core;
 
 namespace VGP133_Final_Assignment.Game
 {
@@ -24,6 +25,9 @@ namespace VGP133_Final_Assignment.Game
                 new Text("Item", _actionBottomLeft.PositionRaw + offset, 20, Color.White);
             _actionsText[3] =
                 new Text("Special", _actionBottomRight.PositionRaw + offset, 20, Color.White);
+
+            _viewport =
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", false);
         }
         public override void Update()
         {

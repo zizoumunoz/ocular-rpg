@@ -1,6 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 using VGP133_Final_Assignment.Components;
+using VGP133_Final_Assignment.Core;
 
 namespace VGP133_Final_Assignment.Game
 {
@@ -23,6 +24,10 @@ namespace VGP133_Final_Assignment.Game
                 new Text("Inn", _actionBottomLeft.PositionRaw + offset, 20, Color.White);
             _actionsText[3] =
                 new Text("Barber Shop", _actionBottomRight.PositionRaw + offset, 20, Color.White);
+
+            _viewport =
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", false);
+
         }
         public override void Update()
         {
@@ -39,7 +44,6 @@ namespace VGP133_Final_Assignment.Game
         {
             _sprite.Render();
         }
-
         public override void RenderActionText()
         {
             for (int i = 0; i < _actionsText.Length; i++)
@@ -56,5 +60,6 @@ namespace VGP133_Final_Assignment.Game
             }
             _actionBottomLeft.IsPressed = false;
         }
+
     }
 }
