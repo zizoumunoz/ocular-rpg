@@ -34,8 +34,13 @@ namespace VGP133_Final_Assignment.Scenes
             _terrainBackground =
                 new Text(_currentTile.Name, new Vector2(52, 42), 20, Color.Red);
 
-            _currentViewport =
+            _inventoryViewport =
                 new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", false);
+            _itemsViewport =
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Item Shop", false);
+            _weaponViewport =
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Weapon Shop", false);
+            _currentViewport = _inventoryViewport;
         }
 
         public override void Update()
@@ -47,21 +52,25 @@ namespace VGP133_Final_Assignment.Scenes
                     _map.MovePlayer('N');
                     _currentViewport.IsActive = false;
                     UpdateCurrentTile();
+                    UpdateCurrentViewport();
                     break;
                 case KeyboardKey.Down:
                     _map.MovePlayer('S');
                     _currentViewport.IsActive = false;
                     UpdateCurrentTile();
+                    UpdateCurrentViewport();
                     break;
                 case KeyboardKey.Left:
                     _map.MovePlayer('W');
                     _currentViewport.IsActive = false;
                     UpdateCurrentTile();
+                    UpdateCurrentViewport();
                     break;
                 case KeyboardKey.Right:
                     _map.MovePlayer('E');
                     _currentViewport.IsActive = false;
                     UpdateCurrentTile();
+                    UpdateCurrentViewport();
                     break;
                 default:
                     break;
@@ -70,12 +79,7 @@ namespace VGP133_Final_Assignment.Scenes
             _currentTile.Update();
 
             _currentViewport.Update();
-            if (_currentTile.ActionBottomLeft.IsPressed)
-            {
-                _currentViewport.IsActive = true;
-            }
-
-            _currentTile.ActionBottomLeft.IsPressed = false;
+            UpdateTileButtons();
 
 
         }
@@ -103,8 +107,51 @@ namespace VGP133_Final_Assignment.Scenes
             _player.Render();
 
         }
+        private void UpdateTileButtons()
+        {
+            switch (_currentTile.Name)
+            {
+                case "Forest":
+                case "Castle":
+                case "Mountain":
+                    if (_currentTile.ActionBottomLeft.IsPressed)
+                    {
+                        _currentViewport = _inventoryViewport;
+                        _currentViewport.IsActive = true;
+                        _currentTile.ActionBottomLeft.IsPressed = false;
+                    }
+                    break;
+                case "Village":
+                    if (_currentTile.ActionTopLeft.IsPressed)
+                    {
+                        _currentViewport = _itemsViewport;
+                        _currentViewport.IsActive = true;
+                        _currentTile.ActionTopLeft.IsPressed = false;
+                    }
+                    else if (_currentTile.ActionTopRight.IsPressed)
+                    {
+                        _currentViewport = _weaponViewport;
+                        _currentViewport.IsActive = true;
+                        _currentTile.ActionTopRight.IsPressed = false;
+                    }
+                    else if (_currentTile.ActionBottomLeft.IsPressed)
+                    {
+                        _player.CurrentHp = _player.MaxHp;
+                        _currentTile.ActionBottomLeft.IsPressed = false;
+                    }
+                    else if (_currentTile.ActionBottomRight.IsPressed)
+                    {
+                        Handler.CurrentScene = new CharacterCreation(Handler);
+                        _currentTile.ActionBottomRight.IsPressed = false;
+                    }
+                    break;
+                default:
+                    _currentViewport = _itemsViewport;
+                    break;
+            }
+        }
 
-        void RenderTileButtons()
+        private void RenderTileButtons()
         {
             _currentTile.ActionTopLeft.Render();
             _currentTile.ActionTopRight.Render();
@@ -114,10 +161,28 @@ namespace VGP133_Final_Assignment.Scenes
             _currentTile.RenderActionText();
         }
 
+        private void UpdateCurrentViewport()
+        {
+            switch (_currentTile.Name)
+            {
+                case "Forest":
+                case "Castle":
+                case "Mountain":
+                    _currentViewport = _inventoryViewport;
+                    break;
+                case "Village":
+                    break;
+                default:
+                    _currentViewport = _itemsViewport;
+                    break;
+            }
+        }
+
         private void UpdateCurrentTile()
         {
             _currentTile = _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
         }
+
 
         private void RenderTerrainBackground()
         {
@@ -154,6 +219,9 @@ namespace VGP133_Final_Assignment.Scenes
 
         // Viewports
         Viewport _currentViewport;
+        Viewport _weaponViewport;
+        Viewport _itemsViewport;
+        Viewport _inventoryViewport;
 
         // Sprites
         Sprite _background =
