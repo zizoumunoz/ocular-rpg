@@ -181,6 +181,7 @@ namespace VGP133_Final_Assignment.Game
 
         Inventory _inventory;
 
+        private string _name = "";
         // ===== Player Stats
         private const int _maxHp = 500;
         private int _currentHp;
@@ -188,6 +189,7 @@ namespace VGP133_Final_Assignment.Game
         private int _def;
         private int _level;
         private int _xp;
+        private int _gold;
 
         private Vector2 _spriteLocation;
 
@@ -230,5 +232,7 @@ namespace VGP133_Final_Assignment.Game
         public int Xp { get => _xp; set => _xp = value; }
         public bool HasOutline { get => _hasOutline; set => _hasOutline = value; }
         public Viewport CurrentViewport { get => _currentViewport; set => _currentViewport = value; }
+        public int Gold { get => _gold; set => _gold = value; }
+        public string Name { get => _name; set => _name = value; }
     }
 }

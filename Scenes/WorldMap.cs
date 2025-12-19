@@ -48,11 +48,10 @@ namespace VGP133_Final_Assignment.Scenes
             _weaponShopInventory.Items.Add(new Item("Shield", "Equipable", 1, 10));
             _weaponShopInventory.Items.Add(new Item("Armor", "Equipable", 1, 10));
 
-            _forestMonsters = new Monster[5];
+            _forestMonsters = new Monster[1];
             _mountainMonsters = new Monster[5];
 
-            
-
+            _forestMonsters[0] = new Golem(Variant.Forest);
 
             // get player from file
             string loadedJson = File.ReadAllText("player.json");
@@ -76,40 +75,50 @@ namespace VGP133_Final_Assignment.Scenes
             _weaponViewport =
                 new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Weapon Shop", false);
             _currentViewport = _inventoryViewport;
+
+            _statusText = new Text("", new Vector2(27, 166), 20, GameColors.DarkBrown);
         }
 
         public override void Update()
         {
             KeyboardKey key = (KeyboardKey)Raylib.GetKeyPressed();
-            switch (key)
+            if (!_currentTile.HasMonster)
             {
-                case KeyboardKey.Up:
-                    _map.MovePlayer('N');
-                    _currentViewport.IsActive = false;
-                    UpdateCurrentTile();
-                    UpdateCurrentViewport();
-                    break;
-                case KeyboardKey.Down:
-                    _map.MovePlayer('S');
-                    _currentViewport.IsActive = false;
-                    UpdateCurrentTile();
-                    UpdateCurrentViewport();
-                    break;
-                case KeyboardKey.Left:
-                    _map.MovePlayer('W');
-                    _currentViewport.IsActive = false;
-                    UpdateCurrentTile();
-                    UpdateCurrentViewport();
-                    break;
-                case KeyboardKey.Right:
-                    _map.MovePlayer('E');
-                    _currentViewport.IsActive = false;
-                    UpdateCurrentTile();
-                    UpdateCurrentViewport();
-                    break;
-                default:
-                    break;
+                switch (key)
+                {
+                    case KeyboardKey.Up:
+                        _map.MovePlayer('N');
+                        _currentViewport.IsActive = false;
+                        UpdateCurrentTile();
+                        UpdateCurrentViewport();
+                        break;
+                    case KeyboardKey.Down:
+                        _map.MovePlayer('S');
+                        _currentViewport.IsActive = false;
+                        UpdateCurrentTile();
+                        UpdateCurrentViewport();
+                        break;
+                    case KeyboardKey.Left:
+                        _map.MovePlayer('W');
+                        _currentViewport.IsActive = false;
+                        UpdateCurrentTile();
+                        UpdateCurrentViewport();
+                        break;
+                    case KeyboardKey.Right:
+                        _map.MovePlayer('E');
+                        _currentViewport.IsActive = false;
+                        UpdateCurrentTile();
+                        UpdateCurrentViewport();
+                        break;
+                    default:
+                        break;
+                }
             }
+            else if (key != KeyboardKey.Null)
+            {
+                Console.WriteLine("[DEBUG] Can't move, monster present. Try to flee.");
+            }
+
 
             _currentTile.Update();
 
@@ -138,6 +147,7 @@ namespace VGP133_Final_Assignment.Scenes
 
             _currentViewport.Render();
             _player.Render();
+            _statusText.Render();
 
         }
         private void UpdateTileButtons()
@@ -214,8 +224,26 @@ namespace VGP133_Final_Assignment.Scenes
         private void UpdateCurrentTile()
         {
             _currentTile = _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
-        }
+            Random rng = new Random();
+            if (_currentTile.Name == "Forest")
+            {
+                if (rng.Next(100) < 50)
+                {
+                    // monster
+                    _currentTile.HasMonster = true;
 
+                    _currentMonster = new Golem(Variant.Forest);
+
+                    _statusText.TextData = $"A {_currentMonster.Name} has appeared!";
+                    
+                }
+                else
+                {
+                    _player.Gold += 10;
+                    _statusText.TextData = $"{_player.Name} has received 10 gold!";
+                }
+            }
+        }
 
         private void RenderTerrainBackground()
         {
@@ -245,6 +273,11 @@ namespace VGP133_Final_Assignment.Scenes
                 default:
                     break;
             }
+
+            if (_currentTile.HasMonster)
+            {
+                _currentMonster.Render();
+            }
         }
 
         private Character? _player;
@@ -256,12 +289,16 @@ namespace VGP133_Final_Assignment.Scenes
         // Monster pool
         private Monster[] _forestMonsters;
         private Monster[] _mountainMonsters;
+        private Monster _currentMonster;
 
         // Viewports
         Viewport _currentViewport;
         Viewport _weaponViewport;
         Viewport _itemsViewport;
         Viewport _inventoryViewport;
+
+        // Text
+        Text _statusText;
 
         // Sprites
         Sprite _background =

@@ -37,7 +37,7 @@ namespace VGP133_Final_Assignment.Scenes
         public override void Update()
         {
             _nameBox.Update();
-
+            _player.Name = _nameBox.TextData;
             // ===== HAIR SELECTION =====
             UpdateButtonGroup(_hairButtonA, _hairButtonB, _hairButtonC);
             if (_hairButtonA.IsPressed)

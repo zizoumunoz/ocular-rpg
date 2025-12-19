@@ -13,6 +13,7 @@ namespace VGP133_Final_Assignment.Game
             _location = location;
             _monsterPool = monsterPool;
             _player = player;
+            _hasMonster = false;
 
             _actionTopLeft =
                new ButtonRectangle(62, 20, 234, 160, "", false);
@@ -37,6 +38,7 @@ namespace VGP133_Final_Assignment.Game
         protected float _rewardChance;
         protected Character _player;
         protected Viewport _viewport;
+        protected bool _hasMonster;
 
         public string Name { get => _name; set => _name = value; }
         public Vector2 Location { get => _location; set => _location = value; }
@@ -45,6 +47,7 @@ namespace VGP133_Final_Assignment.Game
         public ButtonRectangle ActionTopRight { get => _actionTopRight; set => _actionTopRight = value; }
         public ButtonRectangle ActionBottomLeft { get => _actionBottomLeft; set => _actionBottomLeft = value; }
         public ButtonRectangle ActionBottomRight { get => _actionBottomRight; set => _actionBottomRight = value; }
+        public bool HasMonster { get => _hasMonster; set => _hasMonster = value; }
 
         // 4 Action Buttons
         protected ButtonRectangle _actionTopLeft;

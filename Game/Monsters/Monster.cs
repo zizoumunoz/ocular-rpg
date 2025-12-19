@@ -1,17 +1,28 @@
-﻿using VGP133_Final_Assignment.Interfaces;
+﻿using System.Numerics;
+using VGP133_Final_Assignment.Components;
+using VGP133_Final_Assignment.Interfaces;
 
 namespace VGP133_Final_Assignment.Game.Monsters
 {
     public abstract class Monster : IDrawable
     {
-        public void Render()
+        public Monster(Variant variant)
         {
-            throw new NotImplementedException();
+            _variant = variant;
         }
 
-        public void Update()
+        public abstract void Render();
+
+        public abstract void Update();
+
+        public Monster ShallowCopy()
         {
-            throw new NotImplementedException();
+            return (Monster)this.MemberwiseClone();
+        }
+
+        public void Attack()
+        {
+
         }
 
         public void BasicAttack()
@@ -25,13 +36,19 @@ namespace VGP133_Final_Assignment.Game.Monsters
         }
 
         // Monster Attributes
-        private string _name = "";
-        private int _atk;
-        private int _def;
-        private int _hp;
-        private int _goldDropped;
-        private int _xpDropped;
+        protected string _name = "";
+        protected float _atk;
+        protected float _def;
+        protected float _hp;
+        protected float _goldDropped;
+        protected float _xpDropped;
+        protected float _specialAtkChance;
+        protected Variant _variant;
+        protected Sprite _sprite;
 
-        private float _specialAtkChance;
+        // Sprite attributes
+        protected Vector2 _spriteOffset;
+
+        public string Name { get => _name; set => _name = value; }
     }
 }
