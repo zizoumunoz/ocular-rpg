@@ -34,4 +34,13 @@
         Mountain,
         Boss
     }
+
+    public enum Monster
+    {
+        PrairieDog,
+        Slime,
+        Medusa,
+        Crow,
+        Golem
+    }
 }
