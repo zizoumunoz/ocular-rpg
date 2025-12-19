@@ -35,7 +35,7 @@
         Boss
     }
 
-    public enum Monster
+    public enum MonsterType
     {
         PrairieDog,
         Slime,
