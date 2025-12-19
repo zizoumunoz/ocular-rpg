@@ -29,6 +29,32 @@ namespace VGP133_Final_Assignment.Game.Monsters
             throw new NotImplementedException();
         }
 
+        public override void Attack(Character player, Text eventLog)
+        {
+            Random rng = new Random();
+            int calculatedDamage = (int)Atk - player.Def;
+
+            if (calculatedDamage <= 0)
+            {
+                calculatedDamage = 1;
+            }
+
+            bool specialSuccess = rng.Next(100) < (int)_specialAtkChance;
+            if (specialSuccess)
+            {
+                eventLog.TextData +=
+                    $"{Name} reinforces themselves! {Name} defense increases by 10." +
+                    $"\n{Name} does {Atk} damage to {player.Name}!";
+                Def += 10;
+                player.CurrentHp -= calculatedDamage;
+            }
+            else
+            {
+                eventLog.TextData +=
+                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+            }
+        }
+
         private void ApplyVariant()
         {
             switch (_variant)

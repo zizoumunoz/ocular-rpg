@@ -20,20 +20,13 @@ namespace VGP133_Final_Assignment.Game.Monsters
             return (Monster)this.MemberwiseClone();
         }
 
-        public void Attack()
-        {
-
-        }
+        public abstract void Attack(Character player, Text battleLog);
 
         public void BasicAttack()
         {
 
         }
 
-        public void SpecialAttack()
-        {
-
-        }
 
         // Monster Attributes
         protected string _name = "";

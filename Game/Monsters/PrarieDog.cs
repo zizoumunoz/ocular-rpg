@@ -23,11 +23,40 @@ namespace VGP133_Final_Assignment.Game.Monsters
         {
             _sprite.Render();
         }
-
         public override void Update()
         {
             throw new NotImplementedException();
         }
+
+        public override void Attack(Character player, Text eventLog)
+        {
+            Random rng = new Random();
+            int calculatedDamage = (int)Atk - player.Def;
+
+            if (calculatedDamage <= 0)
+            {
+                calculatedDamage = 1;
+            }
+
+            bool specialSuccess = rng.Next(100) == (int)_specialAtkChance;
+            if (specialSuccess)
+            {
+                eventLog.TextData +=
+                    $"{Name} gives {player.Name} the Bubonic Plague! {player.Name}" +
+                    $"'s health reduced by 90%";
+                player.CurrentHp /= 10;
+            }
+            else
+            {
+                eventLog.TextData +=
+                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+                player.CurrentHp -= calculatedDamage;
+            }
+
+        }
+
+
+
 
         private void ApplyVariant()
         {

@@ -19,6 +19,34 @@ namespace VGP133_Final_Assignment.Game.Monsters
             ApplyVariant();
         }
 
+        public override void Attack(Character player, Text eventLog)
+        {
+            Random rng = new Random();
+            int calculatedDamage = (int)Atk - player.Def;
+
+            if (calculatedDamage <= 0)
+            {
+                calculatedDamage = 1;
+            }
+
+            bool specialSuccess = rng.Next(100) < (int)_specialAtkChance;
+            if (specialSuccess)
+            {
+                eventLog.TextData +=
+                    $"{Name} temporarily petrifies {player.Name}! {Name} attacks twice!" +
+                    $"\n{Name} does {calculatedDamage} damage to {player.Name}" +
+                    $"\n{Name} does {calculatedDamage} damage to {player.Name}";
+                player.CurrentHp -= calculatedDamage;
+                player.CurrentHp -= calculatedDamage;
+            }
+            else
+            {
+                eventLog.TextData +=
+                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+                player.CurrentHp -= calculatedDamage;
+            }
+        }
+
         public override void Render()
         {
             _sprite.Render();
