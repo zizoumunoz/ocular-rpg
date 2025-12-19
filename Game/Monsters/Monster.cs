@@ -1,6 +1,6 @@
 ﻿using VGP133_Final_Assignment.Interfaces;
 
-namespace VGP133_Final_Assignment.Game
+namespace VGP133_Final_Assignment.Game.Monsters
 {
     public abstract class Monster : IDrawable
     {

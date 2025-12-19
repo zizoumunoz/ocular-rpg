@@ -1,6 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 using VGP133_Final_Assignment.Components;
+using VGP133_Final_Assignment.Game.Monsters;
 using VGP133_Final_Assignment.Interfaces;
 using static VGP133_Final_Assignment.Core.ResolutionManager;
 

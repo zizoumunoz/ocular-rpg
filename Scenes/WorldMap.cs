@@ -4,7 +4,8 @@ using VGP133_Final_Assignment.Core;
 using VGP133_Final_Assignment.Components;
 using VGP133_Final_Assignment.Game;
 using System.Text.Json;
-using static VGP133_Final_Assignment.Core.ResolutionManager; // for UIScale
+using static VGP133_Final_Assignment.Core.ResolutionManager;
+using VGP133_Final_Assignment.Game.Monsters; // for UIScale
 
 
 namespace VGP133_Final_Assignment.Scenes
@@ -46,6 +47,11 @@ namespace VGP133_Final_Assignment.Scenes
             _weaponShopInventory.Items.Add(new Item("Sword", "Equipable", 1, 10));
             _weaponShopInventory.Items.Add(new Item("Shield", "Equipable", 1, 10));
             _weaponShopInventory.Items.Add(new Item("Armor", "Equipable", 1, 10));
+
+            _forestMonsters = new Monster[5];
+            _mountainMonsters = new Monster[5];
+
+            
 
 
             // get player from file
@@ -245,6 +251,11 @@ namespace VGP133_Final_Assignment.Scenes
         private Map _map;
         private Inventory _itemShopInventory;
         private Inventory _weaponShopInventory;
+        private bool _monsterPresent;
+
+        // Monster pool
+        private Monster[] _forestMonsters;
+        private Monster[] _mountainMonsters;
 
         // Viewports
         Viewport _currentViewport;
@@ -268,6 +279,5 @@ namespace VGP133_Final_Assignment.Scenes
         Sprite _forestBackground;
 
         Terrain _currentTile;
-
     }
 }

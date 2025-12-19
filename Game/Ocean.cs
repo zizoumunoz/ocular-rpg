@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using VGP133_Final_Assignment.Components;
+using VGP133_Final_Assignment.Game.Monsters;
 
 namespace VGP133_Final_Assignment.Game
 {
