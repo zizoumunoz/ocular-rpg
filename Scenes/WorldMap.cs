@@ -14,6 +14,8 @@ namespace VGP133_Final_Assignment.Scenes
     {
         public WorldMap(SceneHandler sceneHandler) : base(sceneHandler)
         {
+            rng = new Random();
+
             _castleBackground =
                 new Sprite("terrain_background_castle", s_origin);
             _castleBackground.Offset = new Vector2(23, 16);
@@ -119,7 +121,76 @@ namespace VGP133_Final_Assignment.Scenes
             _currentViewport.Update();
             UpdateTileButtons();
 
+            if (_currentTile.HasMonster)
+            {
+                BattleLogic();
+            }
+
+            if (_player.CurrentHp <= 0)
+            {
+                Handler.CurrentScene = new YouLose(Handler);
+            }
+
         }
+
+        private void BattleLogic()
+        {
+            // ===== FLEE =====
+
+            if (_currentTile.ActionTopRight.IsPressed)
+            {
+                bool canFlee = rng.Next(100) < 33;
+                if (canFlee)
+                {
+                    _currentTile.HasMonster = false;
+                    _statusText.TextData = $"{_player.Name} has succesfully fled the {_currentMonster.Name}!";
+                }
+                else
+                {
+                    _player.CurrentHp -= (int)_currentMonster.Atk;
+                    _statusText.TextData =
+                        $"{_player.Name} was unable to flee the {_currentMonster.Name}\n" +
+                        $"The {_currentMonster.Name} does {_currentMonster.Atk} damage to {_player.Name}!";
+                }
+                _currentTile.ActionTopRight.IsPressed = false;
+            }
+
+            // ===== ATTACK =====
+
+            else if (_currentTile.ActionTopLeft.IsPressed)
+            {
+                _statusText.TextData =
+                    $"{_player.Name} attacks {_currentMonster.Name} for {CalculateDamage(_player.Atk, (int)_currentMonster.Def)}!";
+                _currentMonster.Hp -= CalculateDamage(_player.Atk, (int)_currentMonster.Def);
+                if (_currentMonster.Hp <= 0)
+                {
+                    _statusText.TextData +=
+                        $"\n{_currentMonster.Name} is defeated!" +
+                        $"\n{_player.Name} gains {_currentMonster.XpDropped} XP and {_currentMonster.GoldDropped} gold!";
+                    _player.Xp += (int)_currentMonster.XpDropped;
+                    _player.Gold += (int)_currentMonster.GoldDropped;
+                    _currentTile.HasMonster = false;
+                }
+                else
+                {
+                    _statusText.TextData +=
+                        $"\n{_currentMonster.Name} attacks {_player.Name} for {CalculateDamage((int)_currentMonster.Atk, _player.Def)} damage!";
+                    _player.CurrentHp -= CalculateDamage((int)_currentMonster.Atk, _player.Def);
+                }
+
+                _currentTile.ActionTopLeft.IsPressed = false;
+            }
+        }
+
+        private int CalculateDamage(int attack, int defense)
+        {
+            if (attack - defense <= 0)
+            {
+                return 1;
+            }
+            return attack - defense;
+        }
+
 
         public override void Render()
         {
@@ -219,7 +290,7 @@ namespace VGP133_Final_Assignment.Scenes
         private void UpdateCurrentTile()
         {
             _currentTile = _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
-            Random rng = new Random();
+
             if (_currentTile.Name == "Forest")
             {
                 if (rng.Next(100) < 50)
@@ -274,7 +345,6 @@ namespace VGP133_Final_Assignment.Scenes
                     return new Golem(variant);
                 default:
                     return new Golem(variant);
-                    break;
             }
         }
 
@@ -317,6 +387,7 @@ namespace VGP133_Final_Assignment.Scenes
         private Map _map;
         private Inventory _itemShopInventory;
         private Inventory _weaponShopInventory;
+        Random rng;
 
         // Monster pool
         private Monster _currentMonster;

@@ -13,7 +13,7 @@ namespace VGP133_Final_Assignment.Game.Monsters
             _hp = 1;
             _goldDropped = 1;
             _xpDropped = 1;
-            _specialAtkChance = 10f;
+            _specialAtkChance = 1f;
             _spriteOffset = new Vector2(91, 115);
 
             ApplyVariant();

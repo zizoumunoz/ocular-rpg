@@ -50,5 +50,10 @@ namespace VGP133_Final_Assignment.Game.Monsters
         protected Vector2 _spriteOffset;
 
         public string Name { get => _name; set => _name = value; }
+        public float Atk { get => _atk; set => _atk = value; }
+        public float Def { get => _def; set => _def = value; }
+        public float Hp { get => _hp; set => _hp = value; }
+        public float GoldDropped { get => _goldDropped; set => _goldDropped = value; }
+        public float XpDropped { get => _xpDropped; set => _xpDropped = value; }
     }
 }
