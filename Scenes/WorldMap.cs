@@ -5,7 +5,8 @@ using VGP133_Final_Assignment.Components;
 using VGP133_Final_Assignment.Game;
 using System.Text.Json;
 using static VGP133_Final_Assignment.Core.ResolutionManager;
-using VGP133_Final_Assignment.Game.Monsters; // for UIScale
+using VGP133_Final_Assignment.Game.Monsters;
+using VGP133_Final_Assignment.Core.Viewports; // for UIScale
 
 
 namespace VGP133_Final_Assignment.Scenes
@@ -42,13 +43,13 @@ namespace VGP133_Final_Assignment.Scenes
             _itemShopInventory = new Inventory();
             _weaponShopInventory = new Inventory();
 
-            _itemShopInventory.Items.Add(new Item("Health Potion", "Consumable", 1, 10));
-            _itemShopInventory.Items.Add(new Item("Attack Potion", "Consumable", 1, 2));
-            _itemShopInventory.Items.Add(new Item("Defense Potion", "Consumable", 1, 2));
+            _itemShopInventory.Items.Add(new Item("Health Potion", "Consumable", 0, 10));
+            _itemShopInventory.Items.Add(new Item("Attack Potion", "Consumable", 0, 2));
+            _itemShopInventory.Items.Add(new Item("Defense Potion", "Consumable", 0, 2));
 
-            _weaponShopInventory.Items.Add(new Item("Sword", "Equipable", 1, 10));
-            _weaponShopInventory.Items.Add(new Item("Shield", "Equipable", 1, 10));
-            _weaponShopInventory.Items.Add(new Item("Armor", "Equipable", 1, 10));
+            _weaponShopInventory.Items.Add(new Item("Sword", "Equipable", 0, 10));
+            _weaponShopInventory.Items.Add(new Item("Shield", "Equipable", 0, 10));
+            _weaponShopInventory.Items.Add(new Item("Armor", "Equipable", 0, 10));
 
             // get player from file
             string loadedJson = File.ReadAllText("player.json");
@@ -56,6 +57,13 @@ namespace VGP133_Final_Assignment.Scenes
             _player.SpriteLocation = new Vector2(164, 146);
             _player.HasOutline = true;
             _player.UpdateSprite();
+            _player.Inventory.Items.Add(_itemShopInventory.Items[0]);
+            _player.Inventory.Items.Add(_itemShopInventory.Items[1]);
+            _player.Inventory.Items.Add(_itemShopInventory.Items[2]);
+            _player.Inventory.Items.Add(_weaponShopInventory.Items[0]);
+            _player.Inventory.Items.Add(_weaponShopInventory.Items[1]);
+            _player.Inventory.Items.Add(_weaponShopInventory.Items[2]);
+
 
             _player.CurrentHp--;
 
@@ -66,11 +74,17 @@ namespace VGP133_Final_Assignment.Scenes
                 _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
 
             _inventoryViewport =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", false);
+                new InventoryViewport(new Vector2(49, 40), new Vector2(110, 110), _player, false);
+            _inventoryViewport.Contents = _player.Inventory;
+
             _itemsViewport =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Item Shop", false);
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Item Shop", _player, false);
+            _itemsViewport.Contents = _itemShopInventory;
+
             _weaponViewport =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Weapon Shop", false);
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Weapon Shop", _player, false);
+            _weaponViewport.Contents = _weaponShopInventory;
+
             _currentViewport = _inventoryViewport;
 
             _statusText = new Text("", new Vector2(27, 166), 20, GameColors.DarkBrown);
@@ -173,9 +187,7 @@ namespace VGP133_Final_Assignment.Scenes
                 }
                 else
                 {
-                    _statusText.TextData +=
-                        $"\n{_currentMonster.Name} attacks {_player.Name} for {CalculateDamage((int)_currentMonster.Atk, _player.Def)} damage!";
-                    _player.CurrentHp -= CalculateDamage((int)_currentMonster.Atk, _player.Def);
+                    _currentMonster.Attack(_player, _statusText);
                 }
 
                 _currentTile.ActionTopLeft.IsPressed = false;
@@ -396,7 +408,7 @@ namespace VGP133_Final_Assignment.Scenes
         Viewport _currentViewport;
         Viewport _weaponViewport;
         Viewport _itemsViewport;
-        Viewport _inventoryViewport;
+        InventoryViewport _inventoryViewport;
 
         // Text
         Text _statusText;

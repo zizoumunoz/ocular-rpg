@@ -42,14 +42,14 @@ namespace VGP133_Final_Assignment.Game.Monsters
             if (specialSuccess)
             {
                 eventLog.TextData +=
-                    $"{Name} gives {player.Name} the Bubonic Plague! {player.Name}" +
+                    $"\n{Name} gives {player.Name} the Bubonic Plague! {player.Name}" +
                     $"'s health reduced by 90%";
                 player.CurrentHp /= 10;
             }
             else
             {
                 eventLog.TextData +=
-                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+                    $"\n{Name} attacks {player.Name} for {calculatedDamage}!";
                 player.CurrentHp -= calculatedDamage;
             }
 

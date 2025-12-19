@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 using VGP133_Final_Assignment.Components;
-using VGP133_Final_Assignment.Core;
+using VGP133_Final_Assignment.Core.Viewports;
 
 namespace VGP133_Final_Assignment.Game
 {
@@ -179,7 +179,7 @@ namespace VGP133_Final_Assignment.Game
             }
         }
 
-        Inventory _inventory;
+        private Inventory _inventory;
 
         private string _name = "";
         // ===== Player Stats
@@ -234,5 +234,6 @@ namespace VGP133_Final_Assignment.Game
         public Viewport CurrentViewport { get => _currentViewport; set => _currentViewport = value; }
         public int Gold { get => _gold; set => _gold = value; }
         public string Name { get => _name; set => _name = value; }
+        public Inventory Inventory { get => _inventory; set => _inventory = value; }
     }
 }

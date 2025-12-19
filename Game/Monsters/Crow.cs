@@ -43,13 +43,13 @@ namespace VGP133_Final_Assignment.Game.Monsters
             if (specialSuccess)
             {
                 eventLog.TextData +=
-                    $"{Name} sharpens their claws! {Name}'s damage increased by 5";
+                    $"\n{Name} sharpens their claws! {Name}'s damage increased by 5";
                 Atk += 5;
             }
             else
             {
                 eventLog.TextData +=
-                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+                    $"\n{Name} attacks {player.Name} for {calculatedDamage}!";
                 player.CurrentHp -= calculatedDamage;
             }
 

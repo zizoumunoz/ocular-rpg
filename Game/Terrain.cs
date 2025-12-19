@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 using VGP133_Final_Assignment.Components;
-using VGP133_Final_Assignment.Core;
+using VGP133_Final_Assignment.Core.Viewports;
 using VGP133_Final_Assignment.Game.Monsters;
 using VGP133_Final_Assignment.Interfaces;
 

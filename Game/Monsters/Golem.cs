@@ -43,7 +43,7 @@ namespace VGP133_Final_Assignment.Game.Monsters
             if (specialSuccess)
             {
                 eventLog.TextData +=
-                    $"{Name} reinforces themselves! {Name} defense increases by 10." +
+                    $"\n{Name} reinforces themselves! {Name} defense increases by 10." +
                     $"\n{Name} does {Atk} damage to {player.Name}!";
                 Def += 10;
                 player.CurrentHp -= calculatedDamage;
@@ -51,7 +51,7 @@ namespace VGP133_Final_Assignment.Game.Monsters
             else
             {
                 eventLog.TextData +=
-                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+                    $"\n{Name} attacks {player.Name} for {calculatedDamage}!";
             }
         }
 

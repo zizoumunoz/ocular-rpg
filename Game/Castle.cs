@@ -2,6 +2,7 @@
 using System.Numerics;
 using VGP133_Final_Assignment.Components;
 using VGP133_Final_Assignment.Core;
+using VGP133_Final_Assignment.Core.Viewports;
 using VGP133_Final_Assignment.Game.Monsters;
 
 namespace VGP133_Final_Assignment.Game
@@ -27,7 +28,7 @@ namespace VGP133_Final_Assignment.Game
                 new Text("Special", _actionBottomRight.PositionRaw + offset, 20, Color.White);
 
             _viewport =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", false);
+                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", player);
         }
 
         public override void Render()

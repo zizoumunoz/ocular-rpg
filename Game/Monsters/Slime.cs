@@ -43,13 +43,13 @@ namespace VGP133_Final_Assignment.Game.Monsters
             if (specialSuccess)
             {
                 eventLog.TextData +=
-                    $"{Name} grows larger. {Name}'s health increased by 5";
+                    $"\n{Name} grows larger. {Name}'s health increased by 5";
                 Hp += 5;
             }
             else
             {
                 eventLog.TextData +=
-                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+                    $"\n{Name} attacks {player.Name} for {calculatedDamage}!";
                 player.CurrentHp -= calculatedDamage;
             }
 

@@ -33,7 +33,7 @@ namespace VGP133_Final_Assignment.Game.Monsters
             if (specialSuccess)
             {
                 eventLog.TextData +=
-                    $"{Name} temporarily petrifies {player.Name}! {Name} attacks twice!" +
+                    $"\n{Name} temporarily petrifies {player.Name}! {Name} attacks twice!" +
                     $"\n{Name} does {calculatedDamage} damage to {player.Name}" +
                     $"\n{Name} does {calculatedDamage} damage to {player.Name}";
                 player.CurrentHp -= calculatedDamage;
@@ -42,7 +42,7 @@ namespace VGP133_Final_Assignment.Game.Monsters
             else
             {
                 eventLog.TextData +=
-                    $"{Name} attacks {player.Name} for {calculatedDamage}!";
+                    $"\n{Name} attacks {player.Name} for {calculatedDamage}!";
                 player.CurrentHp -= calculatedDamage;
             }
         }
