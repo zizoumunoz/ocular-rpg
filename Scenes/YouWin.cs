@@ -1,14 +1,15 @@
 ﻿using Raylib_cs;
 using System.Numerics;
+using System.Text;
 using VGP133_Final_Assignment.Components;
 using VGP133_Final_Assignment.Core;
 using VGP133_Final_Assignment.Game;
 
 namespace VGP133_Final_Assignment.Scenes
 {
-    public class YouLose : Scene
+    public class YouWin : Scene
     {
-        public YouLose(SceneHandler sceneHandler) : base(sceneHandler)
+        public YouWin(SceneHandler sceneHandler) : base(sceneHandler)
         {
             _background = new Sprite("book_empty", s_origin);
             _youLose = new Text("You lose :(", new Vector2(47, 28), 100, GameColors.DarkBrown);
@@ -23,7 +24,7 @@ namespace VGP133_Final_Assignment.Scenes
 
         public override void Update()
         {
-            
+
         }
 
         // Text

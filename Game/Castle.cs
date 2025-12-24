@@ -29,6 +29,11 @@ namespace VGP133_Final_Assignment.Game
 
             _viewport =
                 new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Inventory", player);
+
+            _castleMonsters = new Monster[3];
+            _castleMonsters[0] = new Medusa(Variant.Boss);
+            _castleMonsters[1] = new Golem(Variant.Boss);
+            _castleMonsters[2] = new Boss(Variant.Boss);
         }
 
         public override void Render()
@@ -51,5 +56,9 @@ namespace VGP133_Final_Assignment.Game
             _actionTopLeft.Update();
             _actionTopRight.Update();
         }
+
+        static Monster[] _castleMonsters;
+
+        public static Monster[] CastleMonsters { get => _castleMonsters; set => _castleMonsters = value; }
     }
 }

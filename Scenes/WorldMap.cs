@@ -73,21 +73,33 @@ namespace VGP133_Final_Assignment.Scenes
             _currentTile =
                 _map.MapTiles[(int)_map.PlayerTileLocation.Y, (int)_map.PlayerTileLocation.X];
 
+            // create specialized viewports
             _inventoryViewport =
                 new InventoryViewport(new Vector2(49, 40), new Vector2(110, 110), _player, false);
             _inventoryViewport.Contents = _player.Inventory;
 
             _itemsViewport =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Item Shop", _player, false);
+                new ShopViewport(new Vector2(49, 40), new Vector2(110, 110), "Item Shop", _player, _itemShopInventory, false);
             _itemsViewport.Contents = _itemShopInventory;
 
             _weaponViewport =
-                new Viewport(new Vector2(49, 40), new Vector2(110, 110), "Weapon Shop", _player, false);
+                new ShopViewport(new Vector2(49, 40), new Vector2(110, 110), "Weapon Shop", _player, _weaponShopInventory, false);
             _weaponViewport.Contents = _weaponShopInventory;
 
             _currentViewport = _inventoryViewport;
 
             _statusText = new Text("", new Vector2(27, 166), 20, GameColors.DarkBrown);
+
+            _sceneTitle = new Text("WorldMap Scene", new Vector2(0, 0), 20, Color.RayWhite);
+            _hpText = new Text($"{_player.CurrentHp}", new Vector2(45, 192), (int)(10), new Color(178, 139, 120));
+            _atkText = new Text($"{_player.Atk}", new Vector2(87, 192), (int)(10), new Color(178, 139, 120));
+            _defText = new Text($"{_player.Def}", new Vector2(128, 192), (int)(10), new Color(178, 139, 120));
+            _goldText = new Text($"{_player.Gold}", new Vector2(170, 192), (int)(10), new Color(178, 139, 120));
+
+            _castleMonsters = new Monster[3];
+            _castleMonsters[0] = new Medusa(Variant.Boss);
+            _castleMonsters[1] = new Golem(Variant.Boss);
+            _castleMonsters[2] = new Boss(Variant.Boss);
         }
 
         public override void Update()
@@ -135,9 +147,16 @@ namespace VGP133_Final_Assignment.Scenes
             _currentViewport.Update();
             UpdateTileButtons();
 
-            if (_currentTile.HasMonster)
+            if (_currentTile.Name == "Castle")
             {
-                BattleLogic();
+                BossBattle();
+            }
+            else
+            {
+                if (_currentTile.HasMonster)
+                {
+                    BattleLogic();
+                }
             }
 
             if (_player.CurrentHp <= 0)
@@ -145,6 +164,61 @@ namespace VGP133_Final_Assignment.Scenes
                 Handler.CurrentScene = new YouLose(Handler);
             }
 
+        }
+
+        private void BossBattle()
+        {
+            int monsterIndex = 0;
+            // ===== FLEE =====
+
+            _currentMonster = _castleMonsters[monsterIndex];
+
+            if (_currentTile.ActionTopRight.IsPressed)
+            {
+                bool canFlee = rng.Next(100) < 33;
+                if (canFlee)
+                {
+                    _currentTile.HasMonster = false;
+                    _statusText.TextData = $"{_player.Name} has succesfully fled the {_currentMonster.Name}!";
+                }
+                else
+                {
+                    _player.CurrentHp -= (int)_currentMonster.Atk;
+                    _statusText.TextData =
+                        $"{_player.Name} was unable to flee the {_currentMonster.Name}\n" +
+                        $"The {_currentMonster.Name} does {_currentMonster.Atk} damage to {_player.Name}!";
+                }
+                _currentTile.ActionTopRight.IsPressed = false;
+            }
+
+            // ===== ATTACK =====
+
+            else if (_currentTile.ActionTopLeft.IsPressed)
+            {
+                _statusText.TextData =
+                    $"{_player.Name} attacks {_currentMonster.Name} for {CalculateDamage(_player.Atk, (int)_currentMonster.Def)}!";
+                _currentMonster.Hp -= CalculateDamage(_player.Atk, (int)_currentMonster.Def);
+                if (_currentMonster.Hp <= 0)
+                {
+                    _statusText.TextData +=
+                        $"\n{_currentMonster.Name} is defeated!" +
+                        $"\n{_player.Name} gains {_currentMonster.XpDropped} XP and {_currentMonster.GoldDropped} gold!";
+                    _player.Xp += (int)_currentMonster.XpDropped;
+                    _player.Gold += (int)_currentMonster.GoldDropped;
+                    monsterIndex++;
+                }
+                else
+                {
+                    _currentMonster.Attack(_player, _statusText);
+                }
+
+                _currentTile.ActionTopLeft.IsPressed = false;
+            }
+
+            if (_castleMonsters[2].Hp <= 0)
+            {
+                Handler.CurrentScene = new YouWin(Handler);
+            }
         }
 
         private void BattleLogic()
@@ -215,11 +289,19 @@ namespace VGP133_Final_Assignment.Scenes
             _buttons.Render();
             _statusWindows.Render();
 
-            Raylib.DrawText("WorldMap Scene", 0, 0, 20, Color.RayWhite);
-            Raylib.DrawText($"{_player.CurrentHp}", 45 * UIScale, 192 * UIScale, 10 * UIScale, new Color(178, 139, 120));
-            Raylib.DrawText($"{_player.Atk}", 87 * UIScale, 192 * UIScale, 10 * UIScale, new Color(178, 139, 120));
-            Raylib.DrawText($"{_player.Def}", 128 * UIScale, 192 * UIScale, 10 * UIScale, new Color(178, 139, 120));
+            // scene title using Text component
+            _sceneTitle.Render();
 
+            // update and render player stat texts
+            _hpText.TextData = $"{_player.CurrentHp}";
+            _atkText.TextData = $"{_player.Atk}";
+            _defText.TextData = $"{_player.Def}";
+            _goldText.TextData = $"{_player.Gold}";
+
+            _hpText.Render();
+            _atkText.Render();
+            _defText.Render();
+            _goldText.Render();
 
             RenderTileButtons();
 
@@ -339,6 +421,10 @@ namespace VGP133_Final_Assignment.Scenes
                     _statusText.TextData = $"{_player.Name} has received 10 gold!";
                 }
             }
+            else if (_currentTile.Name == "Castle")
+            {
+                _currentTile.HasMonster = true;
+            }
         }
 
         private Monster GenerateMonster(MonsterType monster, Variant variant)
@@ -412,6 +498,11 @@ namespace VGP133_Final_Assignment.Scenes
 
         // Text
         Text _statusText;
+        Text _sceneTitle;
+        Text _hpText;
+        Text _atkText;
+        Text _defText;
+        Text _goldText;
 
         // Sprites
         Sprite _background =
@@ -429,5 +520,7 @@ namespace VGP133_Final_Assignment.Scenes
         Sprite _forestBackground;
 
         Terrain _currentTile;
+
+        static Monster[] _castleMonsters;
     }
 }

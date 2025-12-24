@@ -75,6 +75,7 @@ namespace VGP133_Final_Assignment.Game.Monsters
                     _xpDropped *= 1.5f;
                     break;
                 case Variant.Boss:
+                    _sprite = new Sprite("enemy_dog_mountain", _spriteOffset);
                     _atk *= 2.5f;
                     _def *= 2.5f;
                     _hp *= 1.5f;

@@ -1,6 +1,7 @@
 ﻿using VGP133_Final_Assignment.Core;
 using Raylib_cs;
 using VGP133_Final_Assignment.Components;
+using System.Numerics;
 
 namespace VGP133_Final_Assignment.Scenes
 {
@@ -9,15 +10,17 @@ namespace VGP133_Final_Assignment.Scenes
         public MainMenu(SceneHandler sceneHandler) : base(sceneHandler)
         {
             _newGame =
-                new ButtonRectangle(73, 17, 67, 64, "main_menu_options", true);
+                new ButtonRectangle(73, 17, 67, 64, "main_menu_options", false);
             _loadGame =
-                new ButtonRectangle(73, 17, 67, 84, "", true);
+                new ButtonRectangle(73, 17, 67, 84, "", false);
             _settings =
-                new ButtonRectangle(73, 17, 67, 104, "", true);
+                new ButtonRectangle(73, 17, 67, 104, "", false);
             _exit =
-                new ButtonRectangle(73, 17, 67, 124, "", true);
+                new ButtonRectangle(73, 17, 67, 124, "", false);
 
             _background = new Sprite("book_empty", s_origin);
+            _menuOptions = new Sprite("main_menu_options", s_origin + new Vector2(67,64));
+            _logo = new Sprite("logo", s_origin + new Vector2(47, 28));
 
             
         }
@@ -26,11 +29,12 @@ namespace VGP133_Final_Assignment.Scenes
         {
             Raylib.ClearBackground(Color.White);
             _background.Render();
-            Raylib.DrawText("Main Menu Scene", 200, 200, 20, Color.Black);
+            _menuOptions.Render();
             _newGame.Render();
             _loadGame.Render();
             _settings.Render();
             _exit.Render();
+            _logo.Render();
         }
 
         public override void Update()
@@ -84,6 +88,7 @@ namespace VGP133_Final_Assignment.Scenes
         private ButtonRectangle _exit;
 
         private Sprite _background;
-
+        private Sprite _menuOptions;
+        private Sprite _logo;
     }
 }

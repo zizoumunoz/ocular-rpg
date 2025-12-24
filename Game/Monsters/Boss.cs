@@ -3,30 +3,20 @@ using VGP133_Final_Assignment.Components;
 
 namespace VGP133_Final_Assignment.Game.Monsters
 {
-    public class Crow : Monster
+    public class Boss : Monster
     {
-        public Crow(Variant variant) : base(variant)
+        public Boss(Variant variant) : base(variant)
         {
-            _name = "Crow";
-            _atk = 20;
-            _def = 10;
-            _hp = 90;
-            _goldDropped = 50;
-            _xpDropped = 25;
-            _specialAtkChance = 50f;
-            _spriteOffset = new Vector2(20, 42);
+            _name = "Boss";
+            _atk = 25;
+            _def = 25;
+            _hp = 100;
+            _goldDropped = 500;
+            _xpDropped = 250;
+            _specialAtkChance = 10f;
+            _spriteOffset = new Vector2(15, 18);
 
             ApplyVariant();
-        }
-
-        public override void Render()
-        {
-            _sprite.Render();
-        }
-
-        public override void Update()
-        {
-            throw new NotImplementedException();
         }
 
         public override void Attack(Character player, Text eventLog)
@@ -43,8 +33,11 @@ namespace VGP133_Final_Assignment.Game.Monsters
             if (specialSuccess)
             {
                 eventLog.TextData +=
-                    $"\n{Name} sharpens their claws! {Name}'s damage increased by 5";
-                Atk += 5;
+                    $"\n{Name} applies fear into {player.Name}'s heart! " +
+                    $"\n{player.Name}'s stats decreased by 1";
+                player.Atk -= 1;
+                player.Def -= 1;
+                player.CurrentHp -= 1;
             }
             else
             {
@@ -55,15 +48,25 @@ namespace VGP133_Final_Assignment.Game.Monsters
 
         }
 
+        public override void Render()
+        {
+            _sprite.Render();
+        }
+
+        public override void Update()
+        {
+            throw new NotImplementedException();
+        }
+
         private void ApplyVariant()
         {
             switch (_variant)
             {
                 case Variant.Forest:
-                    _sprite = new Sprite("enemy_crow", _spriteOffset);
+                    _sprite = new Sprite("enemy_boss", _spriteOffset);
                     break;
                 case Variant.Mountain:
-                    _sprite = new Sprite("enemy_crow_mountain", _spriteOffset);
+                    _sprite = new Sprite("enemy_boss", _spriteOffset);
                     _name = "Mountain Crow";
                     _atk *= 2;
                     _def *= 2;
@@ -72,7 +75,7 @@ namespace VGP133_Final_Assignment.Game.Monsters
                     _xpDropped *= 1.5f;
                     break;
                 case Variant.Boss:
-                    _sprite = new Sprite("enemy_crow_mountain", _spriteOffset);
+                    _sprite = new Sprite("enemy_boss", _spriteOffset);
                     _atk *= 2.5f;
                     _def *= 2.5f;
                     _hp *= 1.5f;

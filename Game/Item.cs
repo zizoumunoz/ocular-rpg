@@ -15,7 +15,7 @@ namespace VGP133_Final_Assignment.Game
         private string _type;
         private int _quantity;
         private int _value;
-
+        public int Price { get; set; }
         public string Name { get => _name; }
         public string Type { get => _type; }
         public int Value { get => _value; }

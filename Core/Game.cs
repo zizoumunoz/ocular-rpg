@@ -15,6 +15,7 @@ namespace VGP133_Final_Assignment.Core
         {
             AssetManager.LoadAssets("Assets/character_creation");
             AssetManager.LoadAssets("Assets/world_map");
+            AssetManager.LoadAssets("Assets/menus");
             _sceneHandler.CurrentScene = new MainMenu(_sceneHandler);
         }
 
